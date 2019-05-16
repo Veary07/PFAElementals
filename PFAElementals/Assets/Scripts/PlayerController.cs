@@ -158,6 +158,10 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine(DashMove());
                 }
                 moveInput = new Vector3(Input.GetAxisRaw("HorizontalP 2"), 0f, Input.GetAxisRaw("VerticalP 2")).normalized;
+                if ((Vector3.right * Input.GetAxisRaw("HorizontalR 2") + Vector3.forward * Input.GetAxisRaw("VerticalR 2")).sqrMagnitude <= 0.0f)
+                {
+                    transform.rotation = Quaternion.LookRotation(moveInput, Vector3.up);
+                }
             }
 
 
