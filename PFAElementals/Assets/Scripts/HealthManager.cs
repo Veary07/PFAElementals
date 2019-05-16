@@ -100,4 +100,9 @@ public class HealthManager : MonoBehaviour {
     {
         damageable = false;
     }
+
+    public float HealthPercentage()
+    {
+        return currentHealth * (maxHealth^-1);
+    }
 }
