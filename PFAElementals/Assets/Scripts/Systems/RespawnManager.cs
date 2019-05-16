@@ -92,9 +92,7 @@ public class RespawnManager : MonoBehaviour {
 
         if (team == 2)
         {
-            Debug.Log(teamTwoSpawn.Count - 1);
             teamTwoSpawn.Remove(teamTwoSpawn[teamTwoSpawn.Count - 1]);
-            Debug.Log(teamTwoSpawn.Count - 1);
             teamTwoSpawn[teamTwoSpawn.Count - 1].GetComponent<Monolith>().SetDamageableOn();
         }
     }

@@ -71,6 +71,10 @@ public class BulletController : MonoBehaviour {
 
             Destroy(gameObject);
         }
+        else if (other.gameObject != owner)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider collision)

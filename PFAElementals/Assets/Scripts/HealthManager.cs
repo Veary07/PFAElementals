@@ -11,6 +11,8 @@ public class HealthManager : MonoBehaviour {
     [SerializeField] int team = 1;
     [SerializeField] bool show = false;
 
+    [SerializeField] HealthBar healthBar;
+
     public RespawnManager respawnManager;
 
     private PlayerController playerController;
@@ -31,6 +33,8 @@ public class HealthManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        float health = (float)currentHealth / (float)maxHealth;
+        healthBar.SetSize(health);
         if (currentHealth <= 0 && destroyed == false)
         {
             Kill();
