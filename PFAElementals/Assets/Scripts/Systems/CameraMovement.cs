@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour {
 
     [SerializeField] Transform playerOne = null;
     [SerializeField] Transform playerTwo;
-    public float lerpPerc;
+    [SerializeField] float lerpPerc;
 	
 	// Update is called once per frame
 	void Update ()

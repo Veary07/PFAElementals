@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 
     BuildingZone buildingZone = null;
 
+    [SerializeField] float decal = 0.05f;
+
     
 
 
@@ -188,12 +190,12 @@ public class PlayerController : MonoBehaviour
 
         if (playerNumber == 1)
             {
-                playerDirection = Vector3.right * Input.GetAxisRaw("HorizontalR") + Vector3.forward * Input.GetAxisRaw("VerticalR");
+                playerDirection = Vector3.right * (Input.GetAxisRaw("HorizontalR") + Random.Range(-decal, decal)) + Vector3.forward * (Input.GetAxisRaw("VerticalR") + Random.Range(-decal, decal));
             }
 
             if (playerNumber == 2)
             {
-                playerDirection = Vector3.right * Input.GetAxisRaw("HorizontalR 2") + Vector3.forward * Input.GetAxisRaw("VerticalR 2");
+                playerDirection = Vector3.right * (Input.GetAxisRaw("HorizontalR 2") + Random.Range(-decal, decal)) + Vector3.forward * (Input.GetAxisRaw("VerticalR 2") + Random.Range(-decal, decal));
             }
 
             if (playerNumber == 3)
@@ -207,7 +209,7 @@ public class PlayerController : MonoBehaviour
             }
 
 
-            if (playerDirection.sqrMagnitude > 0.0f)
+            if (playerDirection.sqrMagnitude > 0.1f)
             {
                 transform.rotation = Quaternion.LookRotation(playerDirection,Vector3.up);   
                 gun.isFiring = true;
