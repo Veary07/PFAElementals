@@ -89,6 +89,25 @@ public class PlayerController : MonoBehaviour
                     shield.CastShield(health);
                 }
             }
+
+            if (playerNumber == 2)
+            {
+                if (Input.anyKey)
+                {
+                    playerDirection = Vector3.right * Input.GetAxisRaw("HorizontalP") + Vector3.forward * Input.GetAxisRaw("VerticalP");
+                    transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
+                }
+
+                if (Input.GetKeyUp("joystick 2 button 1"))
+                {
+                    gun.damageBallTrigger = true;
+                }
+
+                if (Input.GetKeyUp("joystick 2 button 0") && Input.GetKey("joystick 2 button 5"))
+                {
+                    shield.CastShield(health);
+                }
+            }
         }
 
 
@@ -116,6 +135,34 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 else if (Input.GetKeyUp("joystick 1 button 8") || Input.GetKeyUp("joystick 1 button 9"))
+                {
+                    canMove = true;
+                    canSpell = true;
+                }
+            }
+
+            if (playerNumber == 2)
+            {
+                if (Input.GetKey("joystick 2 button 8") && Input.GetKey("joystick 2 button 9"))
+                {
+                    if (!isBuilding)
+                    {
+                        buildingTimer.SetDuration(buildingDuration, 1);
+                        isBuilding = true;
+                    }
+                    Debug.Log("Building");
+                    canMove = false;
+                    canSpell = false;
+                    //moveVelocity = Vector3.zero;
+
+                    if (isBuilding && buildingTimer.Update())
+                    {
+                        respawnManager.AddMonolith(playerNumber, buildingZone.transform);
+                        buildingZone.SetTeamAndIndex(playerNumber, respawnManager.GetListCount(playerNumber) - 1);
+                        isBuilding = false;
+                    }
+                }
+                else if (Input.GetKeyUp("joystick 2 button 8") || Input.GetKeyUp("joystick 2 button 9"))
                 {
                     canMove = true;
                     canSpell = true;
