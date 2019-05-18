@@ -71,7 +71,7 @@ public class BulletController : MonoBehaviour {
 
             Destroy(gameObject);
         }
-        else if (other.gameObject != owner)
+        else if (!other.gameObject.CompareTag("Player") && other.gameObject.layer != target)
         {
             Destroy(gameObject);
         }

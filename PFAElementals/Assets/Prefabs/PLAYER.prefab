@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583069446592166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 3.5}
+  m_LocalPosition: {x: 0, y: 1.5, z: 1.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4117500765032678}
@@ -172,6 +172,7 @@ MonoBehaviour:
   isFiring: 0
   damageBallTrigger: 0
   bullet: {fileID: 114331661425864080, guid: fb371ff4dd6a1614d8b93b1e6eebaf65, type: 3}
+  decal: 0.05
   damageBall: {fileID: 6065368034037079285, guid: ffc34f0da62d0e24192a7a1b62531782,
     type: 3}
   ballSpeed: 50
@@ -342,6 +343,13 @@ MonoBehaviour:
   monolith: {fileID: 0}
   buildingDuration: 1
   startingMoveSpeed: 25
+  decal: 0.05
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   dashSpeed: 75
   dashCoolDown: 2
   shield: {fileID: 0}
@@ -379,6 +387,7 @@ MonoBehaviour:
   healthBar: {fileID: 8252958780214844397}
   respawnManager: {fileID: 0}
   damageable: 1
+  data: {fileID: 0}
 --- !u!1001 &4991729567309163556
 PrefabInstance:
   m_ObjectHideFlags: 0

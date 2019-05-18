@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float decal = 0.05f;
 
-    
+    [SerializeField] AnimationCurve accelerationCurve;
+    [SerializeField] Timer dashTimer;
 
 
     #region DashMove
@@ -125,7 +126,6 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Building");
                     canMove = false;
                     canSpell = false;
-                    //moveVelocity = Vector3.zero;
 
                     if (isBuilding && buildingTimer.Update())
                     {
@@ -153,7 +153,6 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Building");
                     canMove = false;
                     canSpell = false;
-                    //moveVelocity = Vector3.zero;
 
                     if (isBuilding && buildingTimer.Update())
                     {
@@ -174,13 +173,6 @@ public class PlayerController : MonoBehaviour
         {
             canMove = true;
             canSpell = true;
-        }
-
-
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            timer.EndTimer();
         }
 
         #region Mobility
@@ -237,12 +229,12 @@ public class PlayerController : MonoBehaviour
 
         if (playerNumber == 1)
             {
-                playerDirection = Vector3.right * (Input.GetAxisRaw("HorizontalR") + Random.Range(-decal, decal)) + Vector3.forward * (Input.GetAxisRaw("VerticalR") + Random.Range(-decal, decal));
+                playerDirection = Vector3.right * (Input.GetAxisRaw("HorizontalR")) + Vector3.forward * (Input.GetAxisRaw("VerticalR"));
             }
 
             if (playerNumber == 2)
             {
-                playerDirection = Vector3.right * (Input.GetAxisRaw("HorizontalR 2") + Random.Range(-decal, decal)) + Vector3.forward * (Input.GetAxisRaw("VerticalR 2") + Random.Range(-decal, decal));
+                playerDirection = Vector3.right * (Input.GetAxisRaw("HorizontalR 2")) + Vector3.forward * (Input.GetAxisRaw("VerticalR 2"));
             }
 
             if (playerNumber == 3)

@@ -22,12 +22,12 @@ public class HealthManager : MonoBehaviour {
     private bool destroyed = false;
     private GunController currentlyKillingMe;
 
-    private CameraShake shake;
+    public CameraShakerData data;
+
 
 	// Use this for initialization
 	void Start ()
     {
-        shake = FindObjectOfType<CameraShake>();
         playerController = gameObject.GetComponent<PlayerController>();
         respawnManager = FindObjectOfType<RespawnManager>();
         currentHealth = maxHealth;
@@ -75,8 +75,8 @@ public class HealthManager : MonoBehaviour {
     {
         if (damageable)
         {
-         StartCoroutine(shake.Shake(.5f, 3f));
-        currentHealth -= damage;
+            Camera.main.GetComponentInParent<ShakeTransform>().AddShakeEvent(data);
+            currentHealth -= damage;
         }
 
     }

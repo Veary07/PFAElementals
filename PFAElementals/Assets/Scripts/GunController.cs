@@ -8,6 +8,8 @@ public class GunController : MonoBehaviour {
     public bool damageBallTrigger = false;
     public BulletController bullet;
 
+    [SerializeField] private float decal = 0.2f;
+
 
     public BulletController damageBall;
     public Timer damageBallTimer;
@@ -69,7 +71,7 @@ public class GunController : MonoBehaviour {
             if (shotCounter <= 0)
             {
                 shotCounter = timeBetweenShots;
-                BulletController newBullet = Instantiate(bullet, firePosition.position, firePosition.rotation) as BulletController;
+                BulletController newBullet = Instantiate(bullet, firePosition.position, new Quaternion(firePosition.rotation.x, firePosition.rotation.y + Random.Range(-decal, decal), firePosition.rotation.z, firePosition.rotation.w)) as BulletController;
                 newBullet.bulletSpeed = bulletSpeed;
                 newBullet.SetOwner(gameObject.GetComponent<GunController>());
                 if (monolithDestroyer)

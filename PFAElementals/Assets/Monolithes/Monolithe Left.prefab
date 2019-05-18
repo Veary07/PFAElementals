@@ -207,6 +207,7 @@ MonoBehaviour:
   healthBar: {fileID: 4338164653934026121}
   respawnManager: {fileID: 0}
   damageable: 1
+  data: {fileID: 11400000, guid: 70c7a546884de604d88352ac147756ba, type: 2}
 --- !u!1001 &863011162265479744
 PrefabInstance:
   m_ObjectHideFlags: 0
