@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
                 }
 
-                if (Input.GetKeyUp("joystick 1 button 1"))
+                if (Input.GetKeyUp("joystick 1 button 4"))
                 {
                     gun.damageBallTrigger = true;
                 }
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
         {
             if (playerNumber == 1)
             {
-                if (Input.GetKeyDown("joystick 1 button 0") && canDash && !Input.GetKey("joystick 1 button 5"))
+                if ((Input.GetKeyDown("joystick 1 button 5") && canDash) && (Input.GetAxisRaw("HorizontalP") !=0.0f || Input.GetAxisRaw("VerticalP") !=0.0f))
                 {
                     StartCoroutine(DashMove());
                 }

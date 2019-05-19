@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour {
-
+public class BulletController : MonoBehaviour
+{
     public float bulletSpeed;
     [SerializeField] int damage;
 
@@ -71,7 +71,7 @@ public class BulletController : MonoBehaviour {
 
             Destroy(gameObject);
         }
-        else if (!other.gameObject.CompareTag("Player") && other.gameObject.layer != target)
+        else if ((!other.gameObject.CompareTag("Player") && other.gameObject.layer != target) && (!other.gameObject.CompareTag("Bullet")))
         {
             Destroy(gameObject);
         }
@@ -94,4 +94,4 @@ public class BulletController : MonoBehaviour {
     {
         monolithDestroyer = true;
     }
-    }
+}
