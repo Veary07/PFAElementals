@@ -13,11 +13,16 @@ public class RespawnManager : MonoBehaviour {
     [SerializeField] List<Monolith> teamOneSpawn;
     [SerializeField] List<Monolith> teamTwoSpawn;
 
-    //public Monolith monolith;
+    Material map;
+    private bool isMoving = false;
+    private float target;
+    [SerializeField] float movingSpeed = 2f;
 
     // Use this for initialization
     void Start ()
     {
+        map = GameObject.Find("Ground").GetComponent<Renderer>().material;
+
         teamOneSpawn.Clear();
         teamTwoSpawn.Clear();
         for (int i = 0; i < teamOneStartingSpawns.Length; i++)
@@ -40,6 +45,17 @@ public class RespawnManager : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if (isMoving)
+        {
+            map.SetFloat("Vector1_3ECABBA8", Mathf.Lerp(map.GetFloat("Vector1_3ECABBA8"), -target/2, Time.deltaTime * movingSpeed));
+            if (map.GetFloat("Vector1_3ECABBA8") == target)
+            {
+                isMoving = false;
+            }
+        }
+    }
 
     public void AddMonolithToListOne(Monolith Monolith)
     {
@@ -110,6 +126,9 @@ public class RespawnManager : MonoBehaviour {
             teamTwoSpawn.Add(Instantiate(teamTwoMonolith, zone.position, Quaternion.identity));
             teamTwoSpawn[teamTwoSpawn.Count - 2].GetComponent<Monolith>().SetDamageableOff();
         }
+
+        target = zone.position.x;
+        isMoving = true;
     }
 
     public void AddMonolith(int team)
