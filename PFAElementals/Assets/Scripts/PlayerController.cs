@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
                 }
 
-                if (Input.GetKeyUp("joystick 2 button 1"))
+                if (Input.GetKeyUp("joystick 2 button 4"))
                 {
                     gun.damageBallTrigger = true;
                 }
@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour
 
             else if (playerNumber == 2)
             {
-                if (Input.GetKeyDown("joystick 2 button 0") && canDash)
+                if (Input.GetKeyDown("joystick 2 button 5") && canDash)
                 {
                     StartCoroutine(DashMove());
                 }

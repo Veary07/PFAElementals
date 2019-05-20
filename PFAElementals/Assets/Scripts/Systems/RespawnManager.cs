@@ -13,11 +13,17 @@ public class RespawnManager : MonoBehaviour {
     [SerializeField] List<Monolith> teamOneSpawn;
     [SerializeField] List<Monolith> teamTwoSpawn;
 
+    Material map;
+    [SerializeField] float interpolation = 2f;
+    private bool isMoving = false;
+    private float target;
+
     //public Monolith monolith;
 
     // Use this for initialization
     void Start ()
     {
+        map = GameObject.Find("Ground").GetComponent<Renderer>().material;
         teamOneSpawn.Clear();
         teamTwoSpawn.Clear();
         for (int i = 0; i < teamOneStartingSpawns.Length; i++)
@@ -40,6 +46,17 @@ public class RespawnManager : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if (isMoving)
+        {
+            map.SetFloat("Vector1_3ECABBA8", Mathf.Lerp(map.GetFloat("Vector1_3ECABBA8"), -target * 0.5f, Time.deltaTime * interpolation));
+            if (map.GetFloat("Vector1_3ECABBA8") == -target)
+            {
+                isMoving = false;
+            }
+        }  
+    }
 
     public void AddMonolithToListOne(Monolith Monolith)
     {
@@ -101,21 +118,22 @@ public class RespawnManager : MonoBehaviour {
     {
         if (team == 1)
         {
+            //map.SetFloat("Vector1_3ECABBA8", Mathf.Lerp(map.GetFloat("Vector1_3ECABBA8"), -zone.position.x * 0.5f, Time.deltaTime * interpolation));
             teamOneSpawn.Add(Instantiate(teamOneMonolith, zone.position, Quaternion.identity));
             teamOneSpawn[teamOneSpawn.Count - 2].GetComponent<Monolith>().SetDamageableOff();
         }
 
         if (team == 2)
         {
+            //map.SetFloat("Vector1_3ECABBA8", Mathf.Lerp(map.GetFloat("Vector1_3ECABBA8"), - zone.position.x * 0.5f, Time.deltaTime * interpolation));
             teamTwoSpawn.Add(Instantiate(teamTwoMonolith, zone.position, Quaternion.identity));
             teamTwoSpawn[teamTwoSpawn.Count - 2].GetComponent<Monolith>().SetDamageableOff();
         }
+
+        isMoving = true;
+        target = zone.position.x;
     }
 
-    public void AddMonolith(int team)
-    {
-
-    }
 
     public Monolith GetMonolithIndex(int team, int index)
     {
