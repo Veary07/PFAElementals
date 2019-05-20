@@ -17,6 +17,7 @@ public class RespawnManager : MonoBehaviour {
     private bool isMoving = false;
     private float target;
     [SerializeField] float movingSpeed = 2f;
+    [SerializeField] float maxGlowThickness = 0.03f;
 
     // Use this for initialization
     void Start ()
@@ -49,11 +50,19 @@ public class RespawnManager : MonoBehaviour {
     {
         if (isMoving)
         {
-            map.SetFloat("Vector1_3ECABBA8", Mathf.Lerp(map.GetFloat("Vector1_3ECABBA8"), -target/2, Time.deltaTime * movingSpeed));
-            if (map.GetFloat("Vector1_3ECABBA8") == target)
+            // position
+            map.SetFloat("Vector1_3ECABBA8", Mathf.Lerp(map.GetFloat("Vector1_3ECABBA8"), -target * 0.5f, Time.deltaTime * movingSpeed));
+
+            // épaisseur
+            map.SetFloat("Vector1_5B7C5FB6", Mathf.Lerp(map.GetFloat("Vector1_5B7C5FB6"), maxGlowThickness, Time.deltaTime * movingSpeed));
+            if (Mathf.Approximately(-target * 0.5f, map.GetFloat("Vector1_3ECABBA8")))
             {
                 isMoving = false;
             }
+        }
+        if (!isMoving && map.GetFloat("Vector1_5B7C5FB6") > 0)
+        {
+            map.SetFloat("Vector1_5B7C5FB6", Mathf.Lerp(map.GetFloat("Vector1_5B7C5FB6"), 0, Time.deltaTime * movingSpeed));
         }
     }
 
@@ -131,10 +140,6 @@ public class RespawnManager : MonoBehaviour {
         isMoving = true;
     }
 
-    public void AddMonolith(int team)
-    {
-
-    }
 
     public Monolith GetMonolithIndex(int team, int index)
     {
