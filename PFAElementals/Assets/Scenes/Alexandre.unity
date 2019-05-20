@@ -1273,6 +1273,16 @@ PrefabInstance:
       propertyPath: teamTwoStartingSpawns.Array.data[4]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114210921012656512, guid: 3b2e625c14c3cb4408f9a11bb47b7e43,
+        type: 3}
+      propertyPath: map
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f36d202fc8aaaf41b7bc36e0a1ccddb, type: 2}
+    - target: {fileID: 114210921012656512, guid: 3b2e625c14c3cb4408f9a11bb47b7e43,
+        type: 3}
+      propertyPath: interpolation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4225166041619214, guid: 3b2e625c14c3cb4408f9a11bb47b7e43, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2245,7 +2255,7 @@ GameObject:
   - component: {fileID: 1161842081}
   - component: {fileID: 1161842080}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2331,7 +2341,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161842079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0.8, z: -0.7}
+  m_LocalPosition: {x: 0, y: 0.8, z: -0.7}
   m_LocalScale: {x: 21, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2956,6 +2966,11 @@ PrefabInstance:
       propertyPath: respawnManager
       value: 
       objectReference: {fileID: 187903876}
+    - target: {fileID: 114829376450686002, guid: c03bdd386f564ae429b6a947ff64c7d6,
+        type: 3}
+      propertyPath: decal
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4117500765032678, guid: c03bdd386f564ae429b6a947ff64c7d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -3968,5 +3983,38 @@ PrefabInstance:
       propertyPath: playerTwo
       value: 
       objectReference: {fileID: 549321265}
+<<<<<<< HEAD
+    - target: {fileID: 7504608043417818350, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: zoomSpeed
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504608043417818350, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: clampMaxZ
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504608042960785362, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: clearColorMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504608042960785362, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: backgroundColorHDR.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504608042960785362, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: backgroundColorHDR.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504608042960785362, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: backgroundColorHDR.b
+      value: 0
+      objectReference: {fileID: 0}
+=======
+>>>>>>> 2fc4da419acaf808b4e855578d9ce087c0fb8d80
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d6801f7e54edcd4b95f823786897438, type: 3}

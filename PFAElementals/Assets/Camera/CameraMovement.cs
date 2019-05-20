@@ -9,6 +9,13 @@ public class CameraMovement : MonoBehaviour {
     [SerializeField] float lerpPerc;
     [SerializeField] float zoomSpeed = 50f;
 
+    [SerializeField] float clampMaxZ = -20f;
+    [SerializeField] float clampMinZ = -40f;
+
+    [SerializeField] float clampMaxY = 40f;
+    [SerializeField] float clampMinY = 10f;
+
+
     Camera cam;
 
     private void Start()
@@ -26,8 +33,6 @@ public class CameraMovement : MonoBehaviour {
     {
         Vector3 playerOneScreenPosition = cam.WorldToScreenPoint(playerOne.position);
         Vector3 playerTwoScreenPosition = cam.WorldToScreenPoint(playerTwo.position);
-        Debug.Log("player one is " + playerOneScreenPosition.x + " pixels from the left");
-        Debug.Log("player two is " + playerTwoScreenPosition.x + " pixels from the left");
 
         float playerMinX;
         float playerMaxX;
@@ -46,12 +51,12 @@ public class CameraMovement : MonoBehaviour {
 
         if ((playerMaxX - playerMinX) > 400f)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y + (zoomSpeed * Time.deltaTime), transform.position.z - (zoomSpeed * Time.deltaTime)), Time.deltaTime * lerpPerc);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.position.z - (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
         }
 
         else if ((playerMaxX - playerMinX) < 200f)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y - (zoomSpeed * Time.deltaTime), transform.localPosition.z + (zoomSpeed * Time.deltaTime)), Time.deltaTime * lerpPerc);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y - (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.localPosition.z + (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
         }
 
 
