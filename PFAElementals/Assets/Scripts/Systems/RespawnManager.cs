@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class RespawnManager : MonoBehaviour {
 
@@ -111,14 +113,29 @@ public class RespawnManager : MonoBehaviour {
     {
         if (team == 1)
         {
-            teamOneSpawn.Remove(teamOneSpawn[teamOneSpawn.Count - 1]);
-            teamOneSpawn[teamOneSpawn.Count - 1].GetComponent<Monolith>().SetDamageableOn();
+            if(teamOneSpawn.Count > 1)
+            {
+                teamOneSpawn.Remove(teamOneSpawn[teamOneSpawn.Count - 1]);
+                teamOneSpawn[teamOneSpawn.Count - 1].GetComponent<Monolith>().SetDamageableOn();
+            }
+            else
+            {
+                SceneManager.LoadScene("RestartMenu");
+            }
+
         }
 
         if (team == 2)
         {
-            teamTwoSpawn.Remove(teamTwoSpawn[teamTwoSpawn.Count - 1]);
-            teamTwoSpawn[teamTwoSpawn.Count - 1].GetComponent<Monolith>().SetDamageableOn();
+            if(teamTwoSpawn.Count >1)
+            {
+                teamTwoSpawn.Remove(teamTwoSpawn[teamTwoSpawn.Count - 1]);
+                teamTwoSpawn[teamTwoSpawn.Count - 1].GetComponent<Monolith>().SetDamageableOn();
+            }
+            else
+            {
+                SceneManager.LoadScene("RestartMenu");
+            }
         }
     }
 

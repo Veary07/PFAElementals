@@ -71,6 +71,10 @@ public class BulletController : MonoBehaviour
 
             Destroy(gameObject);
         }
+        else if (other.gameObject.tag == "Interactive")
+        {
+            other.gameObject.GetComponent<Interactive>();
+        }
         else if ((!other.gameObject.CompareTag("Player") && other.gameObject.layer != target) && (!other.gameObject.CompareTag("Bullet")))
         {
             Destroy(gameObject);
