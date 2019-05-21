@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class Interactive : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void DoStuff()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
