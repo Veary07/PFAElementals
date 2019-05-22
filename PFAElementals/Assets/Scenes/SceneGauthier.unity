@@ -13803,7 +13803,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 04617e6a9ff01d748ab49b2c1606da69,
         type: 3}
       propertyPath: m_Name
-      value: plane
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 04617e6a9ff01d748ab49b2c1606da69,
         type: 3}
@@ -14732,6 +14732,16 @@ PrefabInstance:
       propertyPath: playerTwo
       value: 
       objectReference: {fileID: 549321265}
+    - target: {fileID: 7504608043417818350, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504608042960785362, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9201828744416677327, guid: c0a2e0a3691a7f545b4f3fd296153f89,
         type: 3}
       propertyPath: m_RenderingPathCustomFrameSettings.bitDatas.data1
