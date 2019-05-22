@@ -10,6 +10,7 @@ public class CameraMovement : MonoBehaviour {
     [SerializeField] float zoomSpeed = 50f;
 
     Camera cam;
+    private Vector3 previousCameraPosition = new Vector3(0,0,0);
 
     [SerializeField] float clampMinY = 20f;
     [SerializeField] float clampMaxY = 40f;
@@ -26,6 +27,8 @@ public class CameraMovement : MonoBehaviour {
     void Update ()
     {
         transform.position = Vector3.Lerp(transform.position, new Vector3((playerOne.transform.position.x + playerTwo.transform.position.x) * 0.5f, transform.position.y, transform.position.z), Time.deltaTime * lerpPerc);
+        transform.LookAt(Vector3.Lerp(previousCameraPosition, new Vector3((playerOne.transform.position.x + playerTwo.transform.position.x) * 0.5f, (playerOne.transform.position.y + playerTwo.transform.position.y) * 0.5f, (playerOne.transform.position.z + playerTwo.transform.position.z) * 0.5f), Time.deltaTime * lerpPerc));
+        previousCameraPosition = new Vector3((playerOne.transform.position.x + playerTwo.transform.position.x) * 0.5f, (playerOne.transform.position.y + playerTwo.transform.position.y) * 0.5f, (playerOne.transform.position.z + playerTwo.transform.position.z) * 0.5f);
     }
 
     private void LateUpdate()

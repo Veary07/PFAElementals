@@ -6,8 +6,8 @@ using UnityEngine;
 public class Decompte : MonoBehaviour
 {
 
-    public Text counterText;
-    public float seconds, minutes;
+    private Text counterText;
+    public float startingTime;
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +19,8 @@ public class Decompte : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        minutes = (int)(Time.time / 60f);
-        seconds = (int)(Time.time % 60f);
-        counterText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        startingTime -= Time.deltaTime;
+        counterText.text = "" + Mathf.Round (startingTime);
     }
+
 }
