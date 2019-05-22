@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AnimationCurve accelerationCurve;
     [SerializeField] Timer dashTimer;
 
+    private bool slowed = false;
+    [SerializeField] private Timer slowTimer;
+
+    
+
 
     #region DashMove
     [SerializeField] private float dashSpeed = 75.0f;
@@ -69,6 +74,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (slowed)
+        {
+            if(slowTimer.Update())
+            {
+                slowed = false;
+                moveSpeed = startingMoveSpeed;
+            }
+        }
+
 
         if (canSpell)
         {
@@ -136,6 +150,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetKeyUp("joystick 1 button 8") || Input.GetKeyUp("joystick 1 button 9"))
                 {
+                    buildingTimer.ResetTimer();
                     canMove = true;
                     canSpell = true;
                 }
@@ -163,6 +178,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetKeyUp("joystick 2 button 8") || Input.GetKeyUp("joystick 2 button 9"))
                 {
+                    buildingTimer.ResetTimer();
                     canMove = true;
                     canSpell = true;
                 }
@@ -318,6 +334,13 @@ public class PlayerController : MonoBehaviour
     public void UnSetBuildingZone()
     {
         buildingZone = null;
+    }
+
+    public void Slow(float slowDuration, float slowedSpeed)
+    {
+        slowed = true;
+        moveSpeed = slowedSpeed;
+        slowTimer.SetDuration(slowDuration, 1);        
     }
 
 }
