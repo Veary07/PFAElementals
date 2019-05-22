@@ -53,11 +53,14 @@ public class CameraMovement : MonoBehaviour {
 
         if ((playerMaxX - playerMinX) > 400f)
         {
+            Debug.Log("400");
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.position.z - (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
         }
 
         else if ((playerMaxX - playerMinX) < 200f)
         {
+            Debug.Log("200");
+
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y - (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.localPosition.z + (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
         }
 

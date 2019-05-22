@@ -16,8 +16,6 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float timer = 1f;
     private float startTimer;
 
-    [SerializeField] private bool canBounce = false;
-
     Timer accelerationTimer = new Timer();
     [SerializeField] float accelerationDuration;
     
@@ -75,22 +73,14 @@ public class BulletController : MonoBehaviour
         }
         else if (other.gameObject.tag == "Interactive")
         {
-            other.gameObject.GetComponent<Interactive>().DoStuff();
-            Destroy(gameObject);
+            other.gameObject.GetComponent<Interactive>();
         }
         else if ((!other.gameObject.CompareTag("Player") && other.gameObject.layer != target) && (!other.gameObject.CompareTag("Bullet")))
         {
-            if(canBounce)
-            {
-                Vector3 v = Vector3.Reflect(transform.forward, other.contacts[0].normal);
-                float rot = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
-                transform.eulerAngles = new Vector3(0, rot, 0);
-            }
-            else
-            {
-                Destroy(gameObject);
-
-            }
+            Vector3 v = Vector3.Reflect(transform.forward, other.contacts[0].normal);
+            float rot = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
+            transform.eulerAngles = new Vector3(0, rot, 0);
+            //Destroy(gameObject);
         }
     }
 
