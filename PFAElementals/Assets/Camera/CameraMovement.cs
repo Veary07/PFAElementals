@@ -10,6 +10,13 @@ public class CameraMovement : MonoBehaviour {
     [SerializeField] float zoomSpeed = 50f;
 
     Camera cam;
+    private Vector3 previousCameraPosition = new Vector3(0,0,0);
+
+    [SerializeField] float clampMinY = 20f;
+    [SerializeField] float clampMaxY = 40f;
+    [SerializeField] float clampMinZ = -40f;
+    [SerializeField] float clampMaxZ = -20f;
+
 
     private void Start()
     {
@@ -20,14 +27,14 @@ public class CameraMovement : MonoBehaviour {
     void Update ()
     {
         transform.position = Vector3.Lerp(transform.position, new Vector3((playerOne.transform.position.x + playerTwo.transform.position.x) * 0.5f, transform.position.y, transform.position.z), Time.deltaTime * lerpPerc);
+        transform.LookAt(Vector3.Lerp(previousCameraPosition, new Vector3((playerOne.transform.position.x + playerTwo.transform.position.x) * 0.5f, (playerOne.transform.position.y + playerTwo.transform.position.y) * 0.5f, (playerOne.transform.position.z + playerTwo.transform.position.z) * 0.5f), Time.deltaTime * lerpPerc));
+        previousCameraPosition = new Vector3((playerOne.transform.position.x + playerTwo.transform.position.x) * 0.5f, (playerOne.transform.position.y + playerTwo.transform.position.y) * 0.5f, (playerOne.transform.position.z + playerTwo.transform.position.z) * 0.5f);
     }
 
     private void LateUpdate()
     {
         Vector3 playerOneScreenPosition = cam.WorldToScreenPoint(playerOne.position);
         Vector3 playerTwoScreenPosition = cam.WorldToScreenPoint(playerTwo.position);
-        Debug.Log("player one is " + playerOneScreenPosition.x + " pixels from the left");
-        Debug.Log("player two is " + playerTwoScreenPosition.x + " pixels from the left");
 
         float playerMinX;
         float playerMaxX;
@@ -46,12 +53,15 @@ public class CameraMovement : MonoBehaviour {
 
         if ((playerMaxX - playerMinX) > 400f)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y + (zoomSpeed * Time.deltaTime), transform.position.z - (zoomSpeed * Time.deltaTime)), Time.deltaTime * lerpPerc);
+            Debug.Log("400");
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.position.z - (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
         }
 
         else if ((playerMaxX - playerMinX) < 200f)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y - (zoomSpeed * Time.deltaTime), transform.localPosition.z + (zoomSpeed * Time.deltaTime)), Time.deltaTime * lerpPerc);
+            Debug.Log("200");
+
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y - (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.localPosition.z + (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
         }
 
 

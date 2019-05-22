@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class RespawnManager : MonoBehaviour {
 
@@ -13,11 +15,17 @@ public class RespawnManager : MonoBehaviour {
     [SerializeField] List<Monolith> teamOneSpawn;
     [SerializeField] List<Monolith> teamTwoSpawn;
 
-    //public Monolith monolith;
+    Material map;
+    private bool isMoving = false;
+    private float target;
+    [SerializeField] float movingSpeed = 2f;
+    [SerializeField] float maxGlowThickness = 0.03f;
 
     // Use this for initialization
     void Start ()
     {
+        map = GameObject.Find("Ground").GetComponent<Renderer>().material;
+
         teamOneSpawn.Clear();
         teamTwoSpawn.Clear();
         for (int i = 0; i < teamOneStartingSpawns.Length; i++)
@@ -40,6 +48,25 @@ public class RespawnManager : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if (isMoving)
+        {
+            // position
+            map.SetFloat("Vector1_3ECABBA8", Mathf.Lerp(map.GetFloat("Vector1_3ECABBA8"), -target * 0.5f, Time.deltaTime * movingSpeed));
+
+            // épaisseur
+            map.SetFloat("Vector1_5B7C5FB6", Mathf.Lerp(map.GetFloat("Vector1_5B7C5FB6"), maxGlowThickness, Time.deltaTime * movingSpeed));
+            if (Mathf.Approximately(-target * 0.5f, map.GetFloat("Vector1_3ECABBA8")))
+            {
+                isMoving = false;
+            }
+        }
+        if (!isMoving && map.GetFloat("Vector1_5B7C5FB6") > 0)
+        {
+            map.SetFloat("Vector1_5B7C5FB6", Mathf.Lerp(map.GetFloat("Vector1_5B7C5FB6"), 0, Time.deltaTime * movingSpeed));
+        }
+    }
 
     public void AddMonolithToListOne(Monolith Monolith)
     {
@@ -86,14 +113,29 @@ public class RespawnManager : MonoBehaviour {
     {
         if (team == 1)
         {
-            teamOneSpawn.Remove(teamOneSpawn[teamOneSpawn.Count - 1]);
-            teamOneSpawn[teamOneSpawn.Count - 1].GetComponent<Monolith>().SetDamageableOn();
+            if(teamOneSpawn.Count > 1)
+            {
+                teamOneSpawn.Remove(teamOneSpawn[teamOneSpawn.Count - 1]);
+                teamOneSpawn[teamOneSpawn.Count - 1].GetComponent<Monolith>().SetDamageableOn();
+            }
+            else
+            {
+                SceneManager.LoadScene("RestartMenu");
+            }
+
         }
 
         if (team == 2)
         {
-            teamTwoSpawn.Remove(teamTwoSpawn[teamTwoSpawn.Count - 1]);
-            teamTwoSpawn[teamTwoSpawn.Count - 1].GetComponent<Monolith>().SetDamageableOn();
+            if(teamTwoSpawn.Count >1)
+            {
+                teamTwoSpawn.Remove(teamTwoSpawn[teamTwoSpawn.Count - 1]);
+                teamTwoSpawn[teamTwoSpawn.Count - 1].GetComponent<Monolith>().SetDamageableOn();
+            }
+            else
+            {
+                SceneManager.LoadScene("RestartMenu");
+            }
         }
     }
 
@@ -110,12 +152,11 @@ public class RespawnManager : MonoBehaviour {
             teamTwoSpawn.Add(Instantiate(teamTwoMonolith, zone.position, Quaternion.identity));
             teamTwoSpawn[teamTwoSpawn.Count - 2].GetComponent<Monolith>().SetDamageableOff();
         }
+
+        target = zone.position.x;
+        isMoving = true;
     }
 
-    public void AddMonolith(int team)
-    {
-
-    }
 
     public Monolith GetMonolithIndex(int team, int index)
     {
