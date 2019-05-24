@@ -57,4 +57,9 @@ public class Timer
     {
         currentTime += modifier;
     }
+
+    public void ResetCurrentTime()
+    {
+        currentTime = 0;
+    }
 }

@@ -9,6 +9,7 @@ TagManager:
   - Team 1
   - Monolith
   - Interactive
+  - Wall
   layers:
   - Default
   - TransparentFX

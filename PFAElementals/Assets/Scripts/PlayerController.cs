@@ -32,10 +32,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] AnimationCurve accelerationCurve;
     [SerializeField] Timer dashTimer;
+    [SerializeField] float dashDuration;
 
 
     #region DashMove
-    [SerializeField] private float dashSpeed = 75.0f;
     [SerializeField] private float dashCoolDown = 2f;
     private bool canDash = true;
 
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
                     gun.damageBallTrigger = true;
                 }
 
-                if (Input.GetKeyUp("joystick 1 button 0") && Input.GetKey("joystick 1 button 5"))
+                if (Input.GetAxis("LT") > 0)
                 {
                     shield.CastShield(health);
                 }
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
                     gun.damageBallTrigger = true;
                 }
 
-                if (Input.GetKeyUp("joystick 2 button 0") && Input.GetKey("joystick 2 button 5"))
+                if (Input.GetAxis("LT 2") > 0)
                 {
                     shield.CastShield(health);
                 }
@@ -116,16 +116,16 @@ public class PlayerController : MonoBehaviour
         {
             if (playerNumber == 1)
             {
-                if (Input.GetKey("joystick 1 button 8") && Input.GetKey("joystick 1 button 9"))
+                if (Input.GetAxis("RT") > 0)
                 {
                     if (!isBuilding)
                     {
                         buildingTimer.SetDuration(buildingDuration, 1);
                         isBuilding = true;
                     }
-                    Debug.Log("Building");
                     canMove = false;
                     canSpell = false;
+                    moveVelocity = new Vector3(0, 0, 0);
 
                     if (isBuilding && buildingTimer.Update())
                     {
@@ -134,23 +134,24 @@ public class PlayerController : MonoBehaviour
                         isBuilding = false;
                     }
                 }
-                else if (Input.GetKeyUp("joystick 1 button 8") || Input.GetKeyUp("joystick 1 button 9"))
+                else if (Input.GetAxis("RT") == 0)
                 {
                     canMove = true;
                     canSpell = true;
+                    buildingTimer.ResetCurrentTime();
                 }
             }
 
             if (playerNumber == 2)
             {
-                if (Input.GetKey("joystick 2 button 8") && Input.GetKey("joystick 2 button 9"))
+                //Input.GetKey("joystick 2 button 8") && Input.GetKey("joystick 2 button 9")
+                if (Input.GetAxis("RT 2") > 0)
                 {
                     if (!isBuilding)
                     {
                         buildingTimer.SetDuration(buildingDuration, 1);
                         isBuilding = true;
                     }
-                    Debug.Log("Building");
                     canMove = false;
                     canSpell = false;
 
@@ -161,10 +162,11 @@ public class PlayerController : MonoBehaviour
                         isBuilding = false;
                     }
                 }
-                else if (Input.GetKeyUp("joystick 2 button 8") || Input.GetKeyUp("joystick 2 button 9"))
+                else if (Input.GetAxis("RT 2") == 0)
                 {
                     canMove = true;
                     canSpell = true;
+                    buildingTimer.ResetCurrentTime();
                 }
             }
         }
@@ -180,7 +182,7 @@ public class PlayerController : MonoBehaviour
         {
             if (playerNumber == 1)
             {
-                if ((Input.GetKeyDown("joystick 1 button 5") && canDash) && (Input.GetAxisRaw("HorizontalP") !=0.0f || Input.GetAxisRaw("VerticalP") !=0.0f))
+                if ((Input.GetKeyDown("joystick 1 button 5") && canDash) && ((Input.GetAxisRaw("HorizontalP") !=0.0f || Input.GetAxisRaw("VerticalP") !=0.0f)))
                 {
                     StartCoroutine(DashMove());
                 }
@@ -194,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
             else if (playerNumber == 2)
             {
-                if (Input.GetKeyDown("joystick 2 button 5") && canDash)
+                if ((Input.GetKeyDown("joystick 2 button 5") && canDash) && ((Input.GetAxisRaw("HorizontalP 2") != 0.0f || Input.GetAxisRaw("VerticalP 2") != 0.0f)))
                 {
                     StartCoroutine(DashMove());
                 }
@@ -287,9 +289,12 @@ public class PlayerController : MonoBehaviour
     IEnumerator DashMove()
     {
         canDash = false;
-        moveSpeed = dashSpeed;
-        yield return null;
-        moveSpeed = startingMoveSpeed;
+        dashTimer.SetDuration(dashDuration, 1);
+        while (!dashTimer.Update())
+        {
+            moveVelocity *= accelerationCurve.Evaluate(dashTimer.Progress());
+            yield return null;
+        }
         yield return new WaitForSeconds(dashCoolDown);
         canDash = true;
     }
