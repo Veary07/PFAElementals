@@ -21,9 +21,12 @@ public class RespawnManager : MonoBehaviour {
     [SerializeField] float movingSpeed = 2f;
     [SerializeField] float maxGlowThickness = 0.03f;
 
+
+
     // Use this for initialization
     void Start ()
     {
+       
         map = GameObject.Find("Ground").GetComponent<Renderer>().material;
 
         teamOneSpawn.Clear();
@@ -77,6 +80,8 @@ public class RespawnManager : MonoBehaviour {
     {
         if (team == 1)
         {
+           
+            Debug.Log("PlaySpawn");
             if (teamOneSpawn.Count > 1)
             {
                 return teamOneSpawn[teamOneSpawn.Count - 2].GetSpawner();
