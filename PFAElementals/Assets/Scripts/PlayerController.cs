@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,9 +35,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Timer dashTimer;
     [SerializeField] float dashDuration;
 
+    [SerializeField] Image dashImage;
+    [SerializeField] Image ballImage;
+    [SerializeField] Image shieldImage;
+
+
 
     #region DashMove
     [SerializeField] private float dashCoolDown = 2f;
+    [SerializeField] Timer dashCoolDownTimer;
     private bool canDash = true;
 
 
@@ -293,11 +300,20 @@ public class PlayerController : MonoBehaviour
         while (!dashTimer.Update())
         {
             moveVelocity *= accelerationCurve.Evaluate(dashTimer.Progress());
+            dashCoolDownTimer.SetDuration(dashCoolDown, 1);
             yield return null;
         }
-        yield return new WaitForSeconds(dashCoolDown);
+        while(!dashCoolDownTimer.Update())
+        {
+            dashImage.fillAmount = dashCoolDownTimer.Progress();
+            yield return null;
+        }
+        dashImage.fillAmount = 1f;
         canDash = true;
     }
+
+
+
 
     public int GetTeam()
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShieldSpell : MonoBehaviour
 {
@@ -15,12 +16,7 @@ public class ShieldSpell : MonoBehaviour
 
     [SerializeField] private int coolDown;
     [SerializeField] private int duration;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Image shieldImage;
 
     // Update is called once per frame
     void Update()
@@ -38,9 +34,11 @@ public class ShieldSpell : MonoBehaviour
         }
         else if (restoring)
         {
+            shieldImage.fillAmount = shieldCoolDown.Progress();
             //shieldCoolDown.Update();
             if (shieldCoolDown.Update())
             {
+                shieldImage.fillAmount = 1;
                 canSpell = true;
                 restoring = false;
             }
@@ -62,5 +60,4 @@ public class ShieldSpell : MonoBehaviour
             Debug.Log("CD");
         }
     }
-    
 }

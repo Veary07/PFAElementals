@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunController : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class GunController : MonoBehaviour {
     public BulletController bullet;
 
     [SerializeField] private float decal = 0.2f;
+    [SerializeField] Image ballImage;
 
 
     public BulletController damageBall;
@@ -45,8 +47,10 @@ public class GunController : MonoBehaviour {
     {
         if (damageBallRestoring)
         {
+            ballImage.fillAmount = damageBallTimer.Progress();
             if (damageBallTimer.Update())
             {
+                ballImage.fillAmount = 1f;
                 damageBallRestoring = false;
                 damageBallTrigger = false;
             }

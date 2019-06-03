@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DashMove : MonoBehaviour {
 
     private Rigidbody rb;
+    [SerializeField] Image fillImage;
 
     [SerializeField] float dashSpeed;
     private float dashTime;
