@@ -92,11 +92,11 @@ public class PlayerController : MonoBehaviour
                     gun.damageBallTrigger = true;
                 }
 
-<<<<<<< HEAD
+
                 if (Input.GetButtonDown("X"))
-=======
+
                 if (Input.GetAxis("LT") > 0)
->>>>>>> 41d9d2e98c8c8a17720b181d1b131cdda58c5383
+
                 {
                     shield.CastShield(health);
                 }
@@ -110,21 +110,21 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
                 }
 
-<<<<<<< HEAD
+
                 if (f2 == -1)
                  {
                      gun.damageBallTrigger = true;
                  }
                  
                 if (Input.GetButtonDown("X 2"))
-=======
+
                 if (Input.GetKeyUp("joystick 2 button 4"))
                 {
                     gun.damageBallTrigger = true;
                 }
 
                 if (Input.GetAxis("LT 2") > 0)
->>>>>>> 41d9d2e98c8c8a17720b181d1b131cdda58c5383
+
                 {
                     shield.CastShield(health);
                 }
@@ -136,57 +136,51 @@ public class PlayerController : MonoBehaviour
         {
             if (playerNumber == 1)
             {
-<<<<<<< HEAD
+
                 if (Input.GetButton("B"))
-=======
-                if (Input.GetAxis("RT") > 0)
->>>>>>> 41d9d2e98c8c8a17720b181d1b131cdda58c5383
-                {
-                    anim.SetInteger("condition", 2);
-                    if (!isBuilding)
-                    {
-                        buildingTimer.SetDuration(buildingDuration, 1);
-                        isBuilding = true;
-                    }
-<<<<<<< HEAD
 
-=======
->>>>>>> 41d9d2e98c8c8a17720b181d1b131cdda58c5383
-                    canMove = false;
-                    canSpell = false;
-                    moveVelocity = new Vector3(0, 0, 0);
+                    if (Input.GetAxis("RT") > 0)
 
-                    if (isBuilding && buildingTimer.Update())
                     {
-                        respawnManager.AddMonolith(playerNumber, buildingZone.transform);
-                        buildingZone.SetTeamAndIndex(playerNumber, respawnManager.GetListCount(playerNumber) - 1);
-                        isBuilding = false;
+                        anim.SetInteger("condition", 2);
+                        if (!isBuilding)
+                        {
+                            buildingTimer.SetDuration(buildingDuration, 1);
+                            isBuilding = true;
+                        }
+
+                        canMove = false;
+                        canSpell = false;
+                        moveVelocity = new Vector3(0, 0, 0);
+
+                        if (isBuilding && buildingTimer.Update())
+                        {
+                            respawnManager.AddMonolith(playerNumber, buildingZone.transform);
+                            buildingZone.SetTeamAndIndex(playerNumber, respawnManager.GetListCount(playerNumber) - 1);
+                            isBuilding = false;
+                        }
                     }
-                }
-<<<<<<< HEAD
-                else if (Input.GetButtonUp("B"))
-                {
-                    canMove = true;
-                    canSpell = true;
-                    anim.SetInteger("condition", 0);
-=======
-                else if (Input.GetAxis("RT") == 0)
-                {
-                    canMove = true;
-                    canSpell = true;
-                    buildingTimer.ResetCurrentTime();
->>>>>>> 41d9d2e98c8c8a17720b181d1b131cdda58c5383
-                }
+
+                    else if (Input.GetButtonUp("B"))
+                    {
+                        canMove = true;
+                        canSpell = true;
+                        anim.SetInteger("condition", 0);
+                    }
+                    else if (Input.GetAxis("RT") == 0)
+                    {
+                        canMove = true;
+                        canSpell = true;
+                        buildingTimer.ResetCurrentTime();
+                    }
             }
 
             if (playerNumber == 2)
             {
-<<<<<<< HEAD
+
                 if (Input.GetButtonDown("B 2"))
-=======
+
                 //Input.GetKey("joystick 2 button 8") && Input.GetKey("joystick 2 button 9")
-                if (Input.GetAxis("RT 2") > 0)
->>>>>>> 41d9d2e98c8c8a17720b181d1b131cdda58c5383
                 {
                     if (!isBuilding)
                     {
@@ -203,11 +197,9 @@ public class PlayerController : MonoBehaviour
                         isBuilding = false;
                     }
                 }
-<<<<<<< HEAD
+
                 else if (Input.GetButtonUp("B 2"))
-=======
-                else if (Input.GetAxis("RT 2") == 0)
->>>>>>> 41d9d2e98c8c8a17720b181d1b131cdda58c5383
+
                 {
                     canMove = true;
                     canSpell = true;
@@ -227,11 +219,9 @@ public class PlayerController : MonoBehaviour
         {
             if (playerNumber == 1)
             {
-<<<<<<< HEAD
+
                 if ((f == 1 && canDash) && (Input.GetAxisRaw("HorizontalP") !=0.0f || Input.GetAxisRaw("VerticalP") !=0.0f))
-=======
                 if ((Input.GetKeyDown("joystick 1 button 5") && canDash) && ((Input.GetAxisRaw("HorizontalP") !=0.0f || Input.GetAxisRaw("VerticalP") !=0.0f)))
->>>>>>> 41d9d2e98c8c8a17720b181d1b131cdda58c5383
                 {
                     StartCoroutine(DashMove());
                 }
@@ -254,11 +244,11 @@ public class PlayerController : MonoBehaviour
 
             else if (playerNumber == 2)
             {
-<<<<<<< HEAD
+
                 if (f2 == 1 && canDash)
-=======
+
                 if ((Input.GetKeyDown("joystick 2 button 5") && canDash) && ((Input.GetAxisRaw("HorizontalP 2") != 0.0f || Input.GetAxisRaw("VerticalP 2") != 0.0f)))
->>>>>>> 41d9d2e98c8c8a17720b181d1b131cdda58c5383
+
                 {
                     StartCoroutine(DashMove());
                 }
