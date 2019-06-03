@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shake Transform Event
   m_EditorClassIdentifier: 
   target: 0
-  amplitude: 2
+  amplitude: 1
   frequency: 60
   duration: 0.3
   blendOverLifeTime:

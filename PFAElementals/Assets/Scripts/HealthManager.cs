@@ -53,10 +53,9 @@ public class HealthManager : MonoBehaviour {
     {
         if (player)
         {
-            //gameObject.SetActive(false);
+            
             currentHealth = maxHealth;
             transform.position = respawnManager.GetMonolith(playerController.TeamNumber()).position;
-            //gameObject.SetActive(true); //TODO le mettre au bon endroit
             currentlyKillingMe.SetMonolithDestroyerOn();
         }
 
