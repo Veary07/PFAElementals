@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TEST
-  m_Shader: {fileID: -6465566751694194690, guid: 65e0874c3fd87b74896fc7447b06e701,
+  m_Shader: {fileID: -6465566751694194690, guid: b9dae9946955cb84d9b4a778ad3ff265,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -59,8 +59,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_5BA22E30:
-        m_Texture: {fileID: 8015107118286478401, guid: 53100c330d7c3684883e4a94b7c85b34,
-          type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_5EA3565B:
@@ -90,7 +89,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_FB088ABF:
-        m_Texture: {fileID: 2800000, guid: 7023408afa22f2b4b84c7963169585cf, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_20B32680_Texture:

@@ -59,15 +59,10 @@ public class RespawnManager : MonoBehaviour {
             map.SetFloat("Vector1_3ECABBA8", Mathf.Lerp(map.GetFloat("Vector1_3ECABBA8"), -target * 0.5f, Time.deltaTime * movingSpeed));
 
             // épaisseur
-            map.SetFloat("Vector1_5B7C5FB6", Mathf.Lerp(map.GetFloat("Vector1_5B7C5FB6"), maxGlowThickness, Time.deltaTime * movingSpeed));
             if (Mathf.Approximately(-target * 0.5f, map.GetFloat("Vector1_3ECABBA8")))
             {
                 isMoving = false;
             }
-        }
-        if (!isMoving && map.GetFloat("Vector1_5B7C5FB6") > 0)
-        {
-            map.SetFloat("Vector1_5B7C5FB6", Mathf.Lerp(map.GetFloat("Vector1_5B7C5FB6"), 0, Time.deltaTime * movingSpeed));
         }
     }
 

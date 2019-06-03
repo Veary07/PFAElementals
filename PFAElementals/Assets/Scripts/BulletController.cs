@@ -18,6 +18,8 @@ public class BulletController : MonoBehaviour
 
     Timer accelerationTimer = new Timer();
     [SerializeField] float accelerationDuration;
+
+    private bool bounce = false;
     
 
     [SerializeField] AnimationCurve accelerationCurve;
@@ -41,6 +43,7 @@ public class BulletController : MonoBehaviour
         {
             damage += 1;
         }
+        transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime * accelerationCurve.Evaluate(progress));
 
         if (Time.time > startTimer + timer)
         {
@@ -48,48 +51,103 @@ public class BulletController : MonoBehaviour
         }
         if (!accelerationTimer.Update())
         {
-             progress = accelerationTimer.Progress();
-        }   
-
-        transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime * accelerationCurve.Evaluate(progress));
-	}
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.layer == target)
-        {
-            if (other.gameObject.tag == "Player" || (other.gameObject.tag == "Monolith" && !monolithDestroyer))
-            {
-            other.gameObject.GetComponent<HealthManager>().TakeDamage(damage);
-            other.gameObject.GetComponent<HealthManager>().SetKiller(owner);
-            }
-            else if (other.gameObject.tag == "Monolith" && monolithDestroyer)
-            {
-                other.gameObject.GetComponent<HealthManager>().SetKiller(owner);
-                other.gameObject.GetComponent<HealthManager>().Termination();
-            }
-
-            Destroy(gameObject);
+            progress = accelerationTimer.Progress();
         }
-        else if (other.gameObject.tag == "Interactive")
+
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        if (!isABall)
         {
-            other.gameObject.GetComponent<Interactive>();
-        }
-        else if ((!other.gameObject.CompareTag("Player") && other.gameObject.layer != target) && (!other.gameObject.CompareTag("Bullet")))
-        {
-            Vector3 v = Vector3.Reflect(transform.forward, other.contacts[0].normal);
-            float rot = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
-            transform.eulerAngles = new Vector3(0, rot, 0);
-            //Destroy(gameObject);
+            if (Physics.Raycast(ray, out hit, Time.deltaTime * bulletSpeed * accelerationCurve.Evaluate(progress)))
+            {
+                if (hit.transform.CompareTag("Player") || (hit.transform.tag == "Monolith" && !monolithDestroyer))
+                {
+                    hit.transform.GetComponent<HealthManager>().TakeDamage(damage);
+                    hit.transform.GetComponent<HealthManager>().SetKiller(owner);
+                    Destroy(gameObject);
+
+                }
+                else if (hit.transform.tag == "Monolith" && monolithDestroyer)
+                {
+                    hit.transform.GetComponent<HealthManager>().SetKiller(owner);
+                    hit.transform.GetComponent<HealthManager>().Termination();
+                    Destroy(gameObject);
+
+                }
+                else if (hit.transform.tag == "Interactive")
+                {
+                    hit.transform.GetComponent<Interactive>();
+                }
+                else if (hit.transform.CompareTag("Wall"))
+                {
+                    if (bounce)
+                    {
+                        Vector3 v = Vector3.Reflect(ray.direction, hit.normal);
+                        float rot = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
+                        transform.eulerAngles = new Vector3(0, rot, 0);
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
+                }
+            }
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnCollisionEnter(Collision other)
     {
-        if (collision.gameObject.tag == "Finish")
+        if(isABall)
         {
-            Destroy(gameObject);
+            if (other.gameObject.layer == target)
+            {
+                if (other.gameObject.tag == "Player" || (other.gameObject.tag == "Monolith" && !monolithDestroyer))
+                {
+                    other.gameObject.GetComponent<HealthManager>().TakeDamage(damage);
+                    other.gameObject.GetComponent<HealthManager>().SetKiller(owner);
+                }
+                else if (other.gameObject.tag == "Monolith" && monolithDestroyer)
+                {
+                    other.gameObject.GetComponent<HealthManager>().SetKiller(owner);
+                    other.gameObject.GetComponent<HealthManager>().Termination();
+                }
+
+                //Destroy(gameObject);
+            }
+            else if (other.gameObject.tag == "Interactive")
+            {
+                other.gameObject.GetComponent<Interactive>();
+            }
+            else if ((!other.gameObject.CompareTag("Player") && other.gameObject.layer != target) && (!other.gameObject.CompareTag("Bullet")))
+            {
+                if (bounce)
+                {
+                    Vector3 v = Vector3.Reflect(transform.forward, other.contacts[0].normal);
+                    float rot = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
+                    transform.eulerAngles = new Vector3(0, rot, 0);
+                }
+                else
+                {
+                   // Destroy(gameObject);
+
+                }
+            }
         }
+       
+    }
+
+    //private void OnTriggerExit(Collider collision)
+    //{
+    //    if (collision.gameObject.tag == "Finish")
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    private void OnCollisionStay(Collision collision)
+    {
+        //Destroy(gameObject);
     }
 
     public void SetOwner(GunController Owner)
