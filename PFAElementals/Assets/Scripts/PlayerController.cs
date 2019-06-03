@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AnimationCurve accelerationCurve;
     [SerializeField] Timer dashTimer;
 
-
     #region DashMove
     [SerializeField] private float dashSpeed = 75.0f;
     [SerializeField] private float dashCoolDown = 2f;
@@ -61,14 +60,21 @@ public class PlayerController : MonoBehaviour
     float leftStickX;
     float leftStickY;
 
+    Animator anim;
+
     void Start()
     {
         moveSpeed = startingMoveSpeed;
         rb = this.GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        float f = Input.GetAxisRaw("Gach");
+        float f2 = Input.GetAxisRaw("Gach 2");
+
+        Debug.Log("f = " + f);
 
         if (canSpell)
         {
@@ -78,14 +84,15 @@ public class PlayerController : MonoBehaviour
                 {
                     playerDirection = Vector3.right * Input.GetAxisRaw("HorizontalP") + Vector3.forward * Input.GetAxisRaw("VerticalP");
                     transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
+
                 }
 
-                if (Input.GetKeyUp("joystick 1 button 4"))
+                if (f == -1)
                 {
                     gun.damageBallTrigger = true;
                 }
 
-                if (Input.GetKeyUp("joystick 1 button 0") && Input.GetKey("joystick 1 button 5"))
+                if (Input.GetButtonDown("X"))
                 {
                     shield.CastShield(health);
                 }
@@ -99,12 +106,12 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
                 }
 
-                if (Input.GetKeyUp("joystick 2 button 4"))
-                {
-                    gun.damageBallTrigger = true;
-                }
-
-                if (Input.GetKeyUp("joystick 2 button 0") && Input.GetKey("joystick 2 button 5"))
+                if (f2 == -1)
+                 {
+                     gun.damageBallTrigger = true;
+                 }
+                 
+                if (Input.GetButtonDown("X 2"))
                 {
                     shield.CastShield(health);
                 }
@@ -116,14 +123,15 @@ public class PlayerController : MonoBehaviour
         {
             if (playerNumber == 1)
             {
-                if (Input.GetKey("joystick 1 button 8") && Input.GetKey("joystick 1 button 9"))
+                if (Input.GetButton("B"))
                 {
+                    anim.SetInteger("condition", 2);
                     if (!isBuilding)
                     {
                         buildingTimer.SetDuration(buildingDuration, 1);
                         isBuilding = true;
                     }
-                    Debug.Log("Building");
+
                     canMove = false;
                     canSpell = false;
 
@@ -134,16 +142,17 @@ public class PlayerController : MonoBehaviour
                         isBuilding = false;
                     }
                 }
-                else if (Input.GetKeyUp("joystick 1 button 8") || Input.GetKeyUp("joystick 1 button 9"))
+                else if (Input.GetButtonUp("B"))
                 {
                     canMove = true;
                     canSpell = true;
+                    anim.SetInteger("condition", 0);
                 }
             }
 
             if (playerNumber == 2)
             {
-                if (Input.GetKey("joystick 2 button 8") && Input.GetKey("joystick 2 button 9"))
+                if (Input.GetButtonDown("B 2"))
                 {
                     if (!isBuilding)
                     {
@@ -161,7 +170,7 @@ public class PlayerController : MonoBehaviour
                         isBuilding = false;
                     }
                 }
-                else if (Input.GetKeyUp("joystick 2 button 8") || Input.GetKeyUp("joystick 2 button 9"))
+                else if (Input.GetButtonUp("B 2"))
                 {
                     canMove = true;
                     canSpell = true;
@@ -180,21 +189,30 @@ public class PlayerController : MonoBehaviour
         {
             if (playerNumber == 1)
             {
-                if ((Input.GetKeyDown("joystick 1 button 5") && canDash) && (Input.GetAxisRaw("HorizontalP") !=0.0f || Input.GetAxisRaw("VerticalP") !=0.0f))
+                if ((f == 1 && canDash) && (Input.GetAxisRaw("HorizontalP") !=0.0f || Input.GetAxisRaw("VerticalP") !=0.0f))
                 {
                     StartCoroutine(DashMove());
                 }
                 moveInput = new Vector3(Input.GetAxisRaw("HorizontalP"), 0f, Input.GetAxisRaw("VerticalP")).normalized;
+
                 if ((Vector3.right * Input.GetAxisRaw("HorizontalR") + Vector3.forward * Input.GetAxisRaw("VerticalR")).sqrMagnitude <= 0.0f)
                 {
                     transform.rotation = Quaternion.LookRotation(moveInput, Vector3.up);
+                }
+                if (Input.GetAxisRaw("HorizontalP") != 0.0f || Input.GetAxisRaw("VerticalP") != 0.0f)
+                {
+                    anim.SetInteger("condition", 1);
+                }
+                else if (Input.GetAxisRaw("HorizontalP") == 0.0f || Input.GetAxisRaw("VerticalP") == 0.0f)
+                {
+                    anim.SetInteger("condition", 0);
                 }
             }
 
 
             else if (playerNumber == 2)
             {
-                if (Input.GetKeyDown("joystick 2 button 5") && canDash)
+                if (f2 == 1 && canDash)
                 {
                     StartCoroutine(DashMove());
                 }
@@ -202,6 +220,14 @@ public class PlayerController : MonoBehaviour
                 if ((Vector3.right * Input.GetAxisRaw("HorizontalR 2") + Vector3.forward * Input.GetAxisRaw("VerticalR 2")).sqrMagnitude <= 0.0f)
                 {
                     transform.rotation = Quaternion.LookRotation(moveInput, Vector3.up);
+                }
+                if (Input.GetAxisRaw("HorizontalP 2") != 0.0f || Input.GetAxisRaw("VerticalP 2") != 0.0f)
+                {
+                    anim.SetInteger("condition", 1);
+                }
+                else if (Input.GetAxisRaw("HorizontalP 2") == 0.0f || Input.GetAxisRaw("VerticalP 2") == 0.0f)
+                {
+                    anim.SetInteger("condition", 0);
                 }
             }
 

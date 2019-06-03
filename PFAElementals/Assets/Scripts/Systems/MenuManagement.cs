@@ -8,11 +8,11 @@ public class MenuManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("joystick 1 button 0"))
+        if (Input.GetKeyDown("A"))
         {
             SceneManager.LoadScene("Alexandre");
         }
-        if (Input.GetKeyDown("joystick 1 button 1"))
+        if (Input.GetKeyDown("B"))
         {
             Application.Quit();
         }
