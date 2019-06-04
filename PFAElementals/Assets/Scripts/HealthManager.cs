@@ -24,12 +24,12 @@ public class HealthManager : MonoBehaviour {
 
     public CameraShakerData data;
 
-    Animator anim;
+    public Animator anim;
 
     // Use this for initialization
     void Start ()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         playerController = gameObject.GetComponent<PlayerController>();
         respawnManager = FindObjectOfType<RespawnManager>();
         currentHealth = maxHealth;
@@ -44,8 +44,6 @@ public class HealthManager : MonoBehaviour {
         if (currentHealth <= 0 && destroyed == false)
         {
             Kill();
-            anim.SetInteger("condition", 3);
-            Debug.Log("Allo");
         }
 
         if (show)
@@ -58,12 +56,12 @@ public class HealthManager : MonoBehaviour {
     {
         if (player)
         {
-
-            Debug.Log("Kill");
             //gameObject.SetActive(false);
             
             currentHealth = maxHealth;
             transform.position = respawnManager.GetMonolith(playerController.TeamNumber()).position;
+            anim.SetInteger("condition", 3);
+
             currentlyKillingMe.SetMonolithDestroyerOn();
 
         }

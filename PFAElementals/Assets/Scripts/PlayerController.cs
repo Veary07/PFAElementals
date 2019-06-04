@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Image ballImage;
     [SerializeField] Image shieldImage;
 
-
+    private Animator anim;
 
     #region DashMove
     [SerializeField] private float dashCoolDown = 2f;
@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         moveSpeed = startingMoveSpeed;
         rb = this.GetComponent<Rigidbody>();
     }
@@ -129,7 +130,9 @@ public class PlayerController : MonoBehaviour
                     {
                         buildingTimer.SetDuration(buildingDuration, 1);
                         isBuilding = true;
+                        anim.SetInteger("condition", 2);
                     }
+
                     canMove = false;
                     canSpell = false;
                     moveVelocity = new Vector3(0, 0, 0);
@@ -139,13 +142,18 @@ public class PlayerController : MonoBehaviour
                         respawnManager.AddMonolith(playerNumber, buildingZone.transform);
                         buildingZone.SetTeamAndIndex(playerNumber, respawnManager.GetListCount(playerNumber) - 1);
                         isBuilding = false;
+                        canBuild = false;
                     }
                 }
                 else if (Input.GetAxis("RT") == 0)
                 {
                     canMove = true;
+                    canBuild = false;
                     canSpell = true;
+                    isBuilding = false;
                     buildingTimer.ResetCurrentTime();
+                    //anim.SetInteger("condition", 0);
+
                 }
             }
 
@@ -154,11 +162,14 @@ public class PlayerController : MonoBehaviour
                 //Input.GetKey("joystick 2 button 8") && Input.GetKey("joystick 2 button 9")
                 if (Input.GetAxis("RT 2") > 0)
                 {
+
                     if (!isBuilding)
                     {
                         buildingTimer.SetDuration(buildingDuration, 1);
                         isBuilding = true;
+                        anim.SetInteger("condition", 2);
                     }
+
                     canMove = false;
                     canSpell = false;
 
@@ -167,13 +178,18 @@ public class PlayerController : MonoBehaviour
                         respawnManager.AddMonolith(playerNumber, buildingZone.transform);
                         buildingZone.SetTeamAndIndex(playerNumber, respawnManager.GetListCount(playerNumber) - 1);
                         isBuilding = false;
+                        canBuild = false;
                     }
                 }
                 else if (Input.GetAxis("RT 2") == 0)
                 {
+                    isBuilding = false;
+                    canBuild = false;
                     canMove = true;
                     canSpell = true;
                     buildingTimer.ResetCurrentTime();
+                    //anim.SetInteger("condition", 0);
+
                 }
             }
         }
@@ -193,9 +209,12 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(DashMove());
                 }
-                moveInput = new Vector3(Input.GetAxisRaw("HorizontalP"), 0f, Input.GetAxisRaw("VerticalP")).normalized;
-                if ((Vector3.right * Input.GetAxisRaw("HorizontalR") + Vector3.forward * Input.GetAxisRaw("VerticalR")).sqrMagnitude <= 0.0f)
+
+                    moveInput = new Vector3(Input.GetAxisRaw("HorizontalP"), 0f, Input.GetAxisRaw("VerticalP")).normalized;
+
+                if ((Vector3.right * Input.GetAxisRaw("HorizontalR") + Vector3.forward * Input.GetAxisRaw("VerticalR")).sqrMagnitude < 0.0f)
                 {
+                    anim.SetInteger ("condition", 1);
                     transform.rotation = Quaternion.LookRotation(moveInput, Vector3.up);
                 }
             }
@@ -207,9 +226,12 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(DashMove());
                 }
-                moveInput = new Vector3(Input.GetAxisRaw("HorizontalP 2"), 0f, Input.GetAxisRaw("VerticalP 2")).normalized;
-                if ((Vector3.right * Input.GetAxisRaw("HorizontalR 2") + Vector3.forward * Input.GetAxisRaw("VerticalR 2")).sqrMagnitude <= 0.0f)
+
+                    moveInput = new Vector3(Input.GetAxisRaw("HorizontalP 2"), 0f, Input.GetAxisRaw("VerticalP 2")).normalized;
+
+                if ((Vector3.right * Input.GetAxisRaw("HorizontalR 2") + Vector3.forward * Input.GetAxisRaw("VerticalR 2")).sqrMagnitude < 0.0f)
                 {
+                    anim.SetInteger("condition", 1);
                     transform.rotation = Quaternion.LookRotation(moveInput, Vector3.up);
                 }
             }
@@ -231,6 +253,15 @@ public class PlayerController : MonoBehaviour
         
 
         moveVelocity = moveInput * moveSpeed;
+        if (isBuilding && canBuild)
+        {
+            moveVelocity = Vector3.zero;
+        }
+
+        //if (moveVelocity == Vector3.zero && !isBuilding && !canBuild)
+        //{
+        //    anim.SetInteger("condition", 0);
+        //}
 
         #endregion
         //rotate with controller
@@ -265,7 +296,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                gun.isFiring = false;
+            transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
+            gun.isFiring = false;
             }
         #endregion 
     }
