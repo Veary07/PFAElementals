@@ -43,12 +43,12 @@ public class HealthManager : MonoBehaviour {
 
         if (currentHealth <= 0 && destroyed == false)
         {
+            //playerController.CanPlay = false;
             Kill();
         }
 
         if (show)
         {
-            Debug.Log(damageable);
         }
 	}
 
@@ -57,7 +57,9 @@ public class HealthManager : MonoBehaviour {
         if (player)
         {
             //gameObject.SetActive(false);
-            
+            playerController.CanPlay = false;
+
+            anim.SetInteger("condition", 0);
             currentHealth = maxHealth;
             transform.position = respawnManager.GetMonolith(playerController.TeamNumber()).position;
             anim.SetInteger("condition", 3);

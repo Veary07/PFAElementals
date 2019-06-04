@@ -17,6 +17,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveVelocity;
     private Vector3 playerDirection;
 
+    private bool canPlay = true;
+    public bool CanPlay
+    {
+        get { return canPlay; }
+        set { canPlay = value; }
+    }
+
     private bool canBuild = false;
     private bool isBuilding = false;
     private Transform buildZone = null;
@@ -43,15 +50,15 @@ public class PlayerController : MonoBehaviour
 
     #region DashMove
     [SerializeField] private float dashCoolDown = 2f;
-    [SerializeField] Timer dashCoolDownTimer;
+    [SerializeField] private Timer dashCoolDownTimer;
     private bool canDash = true;
 
 
     #endregion
 
     #region CrowdControl
-    bool canMove = true;
-    bool canSpell = true;
+    private bool canMove = true;
+    private bool canSpell = true;
     #endregion
 
     #region Spells
@@ -77,6 +84,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (canPlay)
+        {
+
+
 
         if (canSpell)
         {
@@ -152,7 +163,7 @@ public class PlayerController : MonoBehaviour
                     canSpell = true;
                     isBuilding = false;
                     buildingTimer.ResetCurrentTime();
-                    //anim.SetInteger("condition", 0);
+                    anim.SetInteger("condition", 0);
 
                 }
             }
@@ -188,7 +199,7 @@ public class PlayerController : MonoBehaviour
                     canMove = true;
                     canSpell = true;
                     buildingTimer.ResetCurrentTime();
-                    //anim.SetInteger("condition", 0);
+                    anim.SetInteger("condition", 0);
 
                 }
             }
@@ -212,9 +223,8 @@ public class PlayerController : MonoBehaviour
 
                     moveInput = new Vector3(Input.GetAxisRaw("HorizontalP"), 0f, Input.GetAxisRaw("VerticalP")).normalized;
 
-                if ((Vector3.right * Input.GetAxisRaw("HorizontalR") + Vector3.forward * Input.GetAxisRaw("VerticalR")).sqrMagnitude < 0.0f)
+                if ((Vector3.right * Input.GetAxisRaw("HorizontalR") + Vector3.forward * Input.GetAxisRaw("VerticalR")).sqrMagnitude <= 0.0f)
                 {
-                    anim.SetInteger ("condition", 1);
                     transform.rotation = Quaternion.LookRotation(moveInput, Vector3.up);
                 }
             }
@@ -229,9 +239,8 @@ public class PlayerController : MonoBehaviour
 
                     moveInput = new Vector3(Input.GetAxisRaw("HorizontalP 2"), 0f, Input.GetAxisRaw("VerticalP 2")).normalized;
 
-                if ((Vector3.right * Input.GetAxisRaw("HorizontalR 2") + Vector3.forward * Input.GetAxisRaw("VerticalR 2")).sqrMagnitude < 0.0f)
+                if ((Vector3.right * Input.GetAxisRaw("HorizontalR 2") + Vector3.forward * Input.GetAxisRaw("VerticalR 2")).sqrMagnitude <= 0.0f)
                 {
-                    anim.SetInteger("condition", 1);
                     transform.rotation = Quaternion.LookRotation(moveInput, Vector3.up);
                 }
             }
@@ -258,16 +267,20 @@ public class PlayerController : MonoBehaviour
             moveVelocity = Vector3.zero;
         }
 
-        //if (moveVelocity == Vector3.zero && !isBuilding && !canBuild)
-        //{
-        //    anim.SetInteger("condition", 0);
-        //}
+            if (moveVelocity == Vector3.zero && !isBuilding && !canBuild)
+            {
+                anim.SetInteger("condition", 0);
+            }
+            else if (moveVelocity != Vector3.zero && !isBuilding && !canBuild)
+            {
+                anim.SetInteger("condition", 1);
+            }
 
-        #endregion
-        //rotate with controller
-        #region Rotating
+            #endregion
+            //rotate with controller
+            #region Rotating
 
-        if (playerNumber == 1)
+            if (playerNumber == 1)
             {
                 playerDirection = Vector3.right * (Input.GetAxisRaw("HorizontalR")) + Vector3.forward * (Input.GetAxisRaw("VerticalR"));
             }
@@ -296,10 +309,11 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-            transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
+            //transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             gun.isFiring = false;
             }
-        #endregion 
+            #endregion
+        }
     }
     public void SetShieldDurationOn()
     {
