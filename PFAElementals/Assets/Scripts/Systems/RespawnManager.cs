@@ -80,8 +80,6 @@ public class RespawnManager : MonoBehaviour {
     {
         if (team == 1)
         {
-           
-            Debug.Log("PlaySpawn");
             if (teamOneSpawn.Count > 1)
             {
                 return teamOneSpawn[teamOneSpawn.Count - 2].GetSpawner();

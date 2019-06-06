@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveVelocity;
     private Vector3 playerDirection;
 
+
+
     private bool canPlay = true;
     public bool CanPlay
     {
@@ -72,11 +74,17 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    AudioSource source;
+    private AudioManagerSO audioManager;
+
     float leftStickX;
     float leftStickY;
 
     void Start()
     {
+        audioManager = Resources.FindObjectsOfTypeAll<AudioManagerSO>()[0];
+        source = GameObject.Find("AudioManager").GetComponent<AudioSource>();
+
         anim = GetComponentInChildren<Animator>();
         moveSpeed = startingMoveSpeed;
         rb = this.GetComponent<Rigidbody>();
@@ -86,8 +94,6 @@ public class PlayerController : MonoBehaviour
     {
         if (canPlay)
         {
-
-
 
         if (canSpell)
         {
@@ -142,6 +148,7 @@ public class PlayerController : MonoBehaviour
                         buildingTimer.SetDuration(buildingDuration, 1);
                         isBuilding = true;
                         anim.SetInteger("condition", 2);
+                        source.PlayOneShot(audioManager.building, 1f);
                     }
 
                     canMove = false;
@@ -150,6 +157,7 @@ public class PlayerController : MonoBehaviour
 
                     if (isBuilding && buildingTimer.Update())
                     {
+                        source.PlayOneShot(audioManager.totemConstruction);
                         respawnManager.AddMonolith(playerNumber, buildingZone.transform);
                         buildingZone.SetTeamAndIndex(playerNumber, respawnManager.GetListCount(playerNumber) - 1);
                         isBuilding = false;
@@ -179,13 +187,15 @@ public class PlayerController : MonoBehaviour
                         buildingTimer.SetDuration(buildingDuration, 1);
                         isBuilding = true;
                         anim.SetInteger("condition", 2);
-                    }
+                        source.PlayOneShot(audioManager.building, 1f);
+                        }
 
-                    canMove = false;
+                        canMove = false;
                     canSpell = false;
 
                     if (isBuilding && buildingTimer.Update())
                     {
+                        source.PlayOneShot(audioManager.totemConstruction);
                         respawnManager.AddMonolith(playerNumber, buildingZone.transform);
                         buildingZone.SetTeamAndIndex(playerNumber, respawnManager.GetListCount(playerNumber) - 1);
                         isBuilding = false;
@@ -218,6 +228,7 @@ public class PlayerController : MonoBehaviour
             {
                 if ((Input.GetKeyDown("joystick 1 button 5") && canDash) && ((Input.GetAxisRaw("HorizontalP") !=0.0f || Input.GetAxisRaw("VerticalP") !=0.0f)))
                 {
+                    source.PlayOneShot(audioManager.dash);
                     StartCoroutine(DashMove());
                 }
 
@@ -234,7 +245,8 @@ public class PlayerController : MonoBehaviour
             {
                 if ((Input.GetKeyDown("joystick 2 button 5") && canDash) && ((Input.GetAxisRaw("HorizontalP 2") != 0.0f || Input.GetAxisRaw("VerticalP 2") != 0.0f)))
                 {
-                    StartCoroutine(DashMove());
+                        source.PlayOneShot(audioManager.dash);
+                        StartCoroutine(DashMove());
                 }
 
                     moveInput = new Vector3(Input.GetAxisRaw("HorizontalP 2"), 0f, Input.GetAxisRaw("VerticalP 2")).normalized;

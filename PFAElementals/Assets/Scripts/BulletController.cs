@@ -20,13 +20,19 @@ public class BulletController : MonoBehaviour
     [SerializeField] float accelerationDuration;
 
     private bool bounce = false;
-    
+
+    private AudioSource source;
+    private AudioManagerSO audioManager;
+
 
     [SerializeField] AnimationCurve accelerationCurve;
 
     private void Start()
     {
         accelerationTimer.SetDuration(accelerationDuration, 1, false);
+        audioManager = Resources.FindObjectsOfTypeAll<AudioManagerSO>()[0];
+        source = GameObject.Find("AudioManager").GetComponent<AudioSource>();
+
 
         startTimer = Time.time;
         if (player == 1)
@@ -63,6 +69,7 @@ public class BulletController : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Player") || (hit.transform.tag == "Monolith" && !monolithDestroyer))
                 {
+                    source.PlayOneShot(audioManager.attackHit, 1f);
                     hit.transform.GetComponent<HealthManager>().TakeDamage(damage);
                     hit.transform.GetComponent<HealthManager>().SetKiller(owner);
                     Destroy(gameObject);
@@ -70,6 +77,7 @@ public class BulletController : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Monolith" && monolithDestroyer)
                 {
+                    source.PlayOneShot(audioManager.totemHit, 1f);
                     hit.transform.GetComponent<HealthManager>().SetKiller(owner);
                     hit.transform.GetComponent<HealthManager>().Termination();
                     Destroy(gameObject);
@@ -104,8 +112,11 @@ public class BulletController : MonoBehaviour
             {
                 if (other.gameObject.tag == "Player" || (other.gameObject.tag == "Monolith" && !monolithDestroyer))
                 {
+                    source.PlayOneShot(audioManager.fireBallHit, 1f);
+
                     other.gameObject.GetComponent<HealthManager>().TakeDamage(damage);
                     other.gameObject.GetComponent<HealthManager>().SetKiller(owner);
+                    Destroy(gameObject);
                 }
                 else if (other.gameObject.tag == "Monolith" && monolithDestroyer)
                 {

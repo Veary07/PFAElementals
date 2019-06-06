@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0325bacee82a1489400ade786dd721, type: 3}
+  m_Name: Sound Holder
+  m_EditorClassIdentifier: 
+  attackCast: {fileID: 8300000, guid: 1d894cefc950535498bba608e99053b5, type: 3}
+  attackHit: {fileID: 8300000, guid: ed08c739c130b174eb2c6abdebad4e4f, type: 3}
+  building: {fileID: 8300000, guid: 0522eafbadad9e64995e194b2d4112c5, type: 3}
+  dash: {fileID: 8300000, guid: 69b31124f3e33b443a4d9277ab691374, type: 3}
+  fireBallCast: {fileID: 8300000, guid: d9242e4b59d6c134c827c7b7d7bf8467, type: 3}
+  fireBallHit: {fileID: 8300000, guid: 3528343ff84df744cb9921b14f7963c9, type: 3}
+  shield: {fileID: 8300000, guid: 9720f6ab6b4e7f947a4b4492c3040dd9, type: 3}
+  totemConstruction: {fileID: 8300000, guid: a1716cb50dd84e445a006bfedae0a90b, type: 3}
+  totemDestruction: {fileID: 8300000, guid: 82a327871103aae469cabaf3deff35d2, type: 3}
+  totemHit: {fileID: 8300000, guid: 61b584a4ac3434f4697af248089da059, type: 3}

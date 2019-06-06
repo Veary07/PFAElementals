@@ -33,8 +33,14 @@ public class GunController : MonoBehaviour {
 
     private int target;
 
+
+    private AudioSource source;
+    public AudioClip bulletShot;
+    public AudioClip ballShot;
+
     private void Start()
     {
+        source = GameObject.Find("AudioManager").GetComponent<AudioSource>();
         if (player == 1)
             target = 10;
         else if (player == 2)
@@ -63,6 +69,7 @@ public class GunController : MonoBehaviour {
         if (damageBallTrigger && !damageBallRestoring)
         {
             BulletController newDamageBall = Instantiate(damageBall, firePosition.position, firePosition.rotation) as BulletController;
+            source.PlayOneShot(ballShot, 1f);
             newDamageBall.bulletSpeed = ballSpeed;
             newDamageBall.SetOwner(gameObject.GetComponent<GunController>());
             damageBallTimer.SetDuration(ballCoolDown, 1);
@@ -76,6 +83,7 @@ public class GunController : MonoBehaviour {
             {
                 shotCounter = timeBetweenShots;
                 BulletController newBullet = Instantiate(bullet, firePosition.position, new Quaternion(firePosition.rotation.x, firePosition.rotation.y + Random.Range(-decal, decal), firePosition.rotation.z, firePosition.rotation.w)) as BulletController;
+                source.PlayOneShot(bulletShot, 1f);
                 newBullet.bulletSpeed = bulletSpeed;
                 newBullet.SetOwner(gameObject.GetComponent<GunController>());
                 if (monolithDestroyer)

@@ -12,17 +12,27 @@ public class ShieldSpell : MonoBehaviour
     private bool shielded = false;
     private bool restoring = false;
 
+    private AudioManagerSO audioManager;
+    AudioSource source;
+
     private HealthManager healthManager;
 
     [SerializeField] private int coolDown;
     [SerializeField] private int duration;
     [SerializeField] Image shieldImage;
 
+    private void Start()
+    {
+        audioManager = Resources.FindObjectsOfTypeAll<AudioManagerSO>()[0];
+        source = GameObject.Find("AudioManager").GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (shielded == true)
         {
+            source.PlayOneShot(audioManager.shield);
             //shieldDuration.Update();
             if (shieldDuration.Update())
             {
