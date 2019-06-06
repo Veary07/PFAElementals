@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetAxis("LT") > 0)
                 {
-                    shield.CastShield(health);
+                        shield.CastShield(health);
                 }
             }
 
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetAxis("LT 2") > 0)
                 {
-                    shield.CastShield(health);
+                        shield.CastShield(health);
                 }
             }
         }

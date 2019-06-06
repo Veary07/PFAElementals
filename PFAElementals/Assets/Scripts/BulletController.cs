@@ -65,21 +65,33 @@ public class BulletController : MonoBehaviour
 
         if (!isABall)
         {
+
             if (Physics.Raycast(ray, out hit, Time.deltaTime * bulletSpeed * accelerationCurve.Evaluate(progress)))
             {
                 if (hit.transform.CompareTag("Player") || (hit.transform.tag == "Monolith" && !monolithDestroyer))
                 {
+                    if(hit.transform.gameObject.layer == target)
+                    {
                     source.PlayOneShot(audioManager.attackHit, 1f);
                     hit.transform.GetComponent<HealthManager>().TakeDamage(damage);
                     hit.transform.GetComponent<HealthManager>().SetKiller(owner);
+                    }
+
                     Destroy(gameObject);
+
+
+
 
                 }
                 else if (hit.transform.tag == "Monolith" && monolithDestroyer)
                 {
+                    if(hit.transform.gameObject.layer == target)
+                    {
                     source.PlayOneShot(audioManager.totemHit, 1f);
                     hit.transform.GetComponent<HealthManager>().SetKiller(owner);
                     hit.transform.GetComponent<HealthManager>().Termination();
+                    }
+
                     Destroy(gameObject);
 
                 }
