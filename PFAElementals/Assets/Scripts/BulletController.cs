@@ -30,7 +30,7 @@ public class BulletController : MonoBehaviour
     private void Start()
     {
         accelerationTimer.SetDuration(accelerationDuration, 1, false);
-        audioManager = Resources.FindObjectsOfTypeAll<AudioManagerSO>()[0];
+        audioManager = Resources.Load("Sound Holder") as AudioManagerSO;
         source = GameObject.Find("AudioManager").GetComponent<AudioSource>();
 
 

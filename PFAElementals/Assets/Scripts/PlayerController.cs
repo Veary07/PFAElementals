@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        audioManager = Resources.FindObjectsOfTypeAll<AudioManagerSO>()[0];
+        audioManager = Resources.Load("Sound Holder") as AudioManagerSO;
         source = GameObject.Find("AudioManager").GetComponent<AudioSource>();
 
         anim = GetComponentInChildren<Animator>();
