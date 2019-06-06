@@ -23,7 +23,7 @@ public class ShieldSpell : MonoBehaviour
 
     private void Start()
     {
-        audioManager = Resources.FindObjectsOfTypeAll<AudioManagerSO>()[0];
+        audioManager = Resources.Load("Sound Holder") as AudioManagerSO;
         source = GameObject.Find("AudioManager").GetComponent<AudioSource>();
     }
 
