@@ -32,7 +32,6 @@ public class ShieldSpell : MonoBehaviour
     {
         if (shielded == true)
         {
-            source.PlayOneShot(audioManager.shield);
             //shieldDuration.Update();
             if (shieldDuration.Update())
             {
@@ -60,6 +59,7 @@ public class ShieldSpell : MonoBehaviour
         healthManager = health;
         if (canSpell)
         {
+            source.PlayOneShot(audioManager.shield);
             canSpell = false;
             shielded = true;
             health.SetDamageableOff();
