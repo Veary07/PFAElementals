@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 1
-  damage: 25
+  damage: 20
   player: 1
   isABall: 0
   timer: 20

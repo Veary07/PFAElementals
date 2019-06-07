@@ -110,8 +110,6 @@ MonoBehaviour:
   isABall: 1
   timer: 3
   accelerationDuration: 1
-  bulletHitSound: {fileID: 8300000, guid: ed08c739c130b174eb2c6abdebad4e4f, type: 3}
-  ballHitSound: {fileID: 8300000, guid: 3528343ff84df744cb9921b14f7963c9, type: 3}
   accelerationCurve:
     serializedVersion: 2
     m_Curve:
