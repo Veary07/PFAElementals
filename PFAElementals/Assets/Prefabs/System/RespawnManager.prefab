@@ -1,37 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1717712095901022}
-  m_IsPrefabAsset: 1
 --- !u!1 &1717712095901022
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4225166041619214}
   - component: {fileID: 114210921012656512}
   m_Layer: 0
   m_Name: RespawnManager
-  m_TagString: Untagged
+  m_TagString: Monolith
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4225166041619214
 Transform:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717712095901022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -42,9 +33,10 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114210921012656512
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717712095901022}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -57,7 +49,18 @@ MonoBehaviour:
   teamTwoStartingSpawns:
   - {fileID: 0}
   - {fileID: 0}
-  teamOneMonolith: {fileID: 1221764243383040, guid: 34ddc2f763e3af44e87fc0f0b8c71a6a,
-    type: 2}
-  teamTwoMonolith: {fileID: 1692465157408428, guid: 181caf33dfd913247a6c8184c823377c,
-    type: 2}
+  teamOneMonolith: {fileID: 0}
+  teamTwoMonolith: {fileID: 0}
+  teamOneSpawn:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  teamTwoSpawn:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  movingSpeed: 2
+  maxGlowThickness: 0.03

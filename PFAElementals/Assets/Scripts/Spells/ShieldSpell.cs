@@ -18,7 +18,7 @@ public class ShieldSpell : MonoBehaviour
     private HealthManager healthManager;
 
     [SerializeField] private int coolDown;
-    [SerializeField] private int duration;
+    [SerializeField] private float duration;
     [SerializeField] Image shieldImage;
 
     private void Start()
