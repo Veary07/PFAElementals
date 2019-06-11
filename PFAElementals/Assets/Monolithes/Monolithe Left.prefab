@@ -199,15 +199,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c3cc880c41eb940881a83f9756e571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2000
+  startMaxHealth: 2000
   playerPrefab: {fileID: 0}
   player: 0
   team: 1
   show: 0
+  spawn: {fileID: 0}
   healthBar: {fileID: 4338164653934026121}
   respawnManager: {fileID: 0}
   damageable: 1
   data: {fileID: 11400000, guid: 70c7a546884de604d88352ac147756ba, type: 2}
+  anim: {fileID: 0}
 --- !u!1001 &863011162265479744
 PrefabInstance:
   m_ObjectHideFlags: 0

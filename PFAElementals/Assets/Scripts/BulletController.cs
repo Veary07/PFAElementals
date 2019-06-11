@@ -20,6 +20,8 @@ public class BulletController : MonoBehaviour
     [SerializeField] float accelerationDuration;
 
     private bool bounce = false;
+    private bool steal = false;
+    private int regene;
 
     private AudioSource source;
     private AudioManagerSO audioManager;
@@ -77,12 +79,13 @@ public class BulletController : MonoBehaviour
                     source.PlayOneShot(audioManager.attackHit, 1f);
                     hit.transform.GetComponent<HealthManager>().TakeDamage(damage);
                     hit.transform.GetComponent<HealthManager>().SetKiller(owner);
+                        if(steal)
+                        {
+                            owner.GetComponentInParent<HealthManager>().TakeDamage(-regene);
+                        }
                     }
 
                     Destroy(gameObject);
-
-
-
 
                 }
                 else if (hit.transform.tag == "Monolith" && monolithDestroyer)
@@ -99,15 +102,26 @@ public class BulletController : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Interactive")
                 {
-                    hit.transform.GetComponent<Interactive>();
+                    source.PlayOneShot(audioManager.totemHit, 1f);
+                    hit.transform.GetComponent<Interactive>().DoStuff();
+                    Destroy(gameObject);
+                }
+                else if (hit.transform.gameObject.tag == "Bonus")
+                {
+                    source.PlayOneShot(audioManager.totemHit, 1f);
+                    hit.transform.gameObject.GetComponent<Bonus>().SetKiller(owner);
+                    hit.transform.GetComponent<Bonus>().DoStuff();
+                    Destroy(gameObject);
                 }
                 else if (hit.transform.CompareTag("Wall"))
                 {
                     if (bounce)
                     {
+                        source.PlayOneShot(audioManager.totemHit, 1f);
                         Vector3 v = Vector3.Reflect(ray.direction, hit.normal);
                         float rot = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
                         transform.eulerAngles = new Vector3(0, rot, 0);
+                        CheckEnemyAngle();
                     }
                     else
                     {
@@ -144,6 +158,10 @@ public class BulletController : MonoBehaviour
             {
                 other.gameObject.GetComponent<Interactive>();
             }
+            else if (other.gameObject.tag == "Bonus")
+            {
+                other.gameObject.GetComponent<Bonus>().SetKiller(owner);
+            }
             else if ((!other.gameObject.CompareTag("Player") && other.gameObject.layer != target) && (!other.gameObject.CompareTag("Bullet")))
             {
                 if (bounce)
@@ -155,11 +173,9 @@ public class BulletController : MonoBehaviour
                 else
                 {
                    // Destroy(gameObject);
-
                 }
             }
-        }
-       
+        }  
     }
 
     public void SetOwner(GunController Owner)
@@ -184,10 +200,23 @@ public class BulletController : MonoBehaviour
         {
             targetPlayer = GameObject.Find("PLAYER 1");
         }
-        Debug.Log(targetPlayer);
         if ( Mathf.Sqrt(Mathf.Pow(Vector3.Angle(targetPlayer.transform.position - transform.position, transform.forward), 2)) < 15f)
         {
             transform.LookAt(targetPlayer.transform.position + new Vector3(0, 1, 0), transform.up);
         }
+    }
+
+    public void SetDamage(int _damage)
+    {
+        damage = _damage;
+    }
+    public void SetBounce()
+    {
+        bounce = true;
+    }
+    public void SetLifeSteal(int _regene)
+    {
+        steal = true;
+        regene = _regene;
     }
 }

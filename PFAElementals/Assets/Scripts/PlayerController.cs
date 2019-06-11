@@ -54,6 +54,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCoolDown = 2f;
     [SerializeField] private Timer dashCoolDownTimer;
     private bool canDash = true;
+    [SerializeField] Timer slowTimer;
+    private bool slowed = false;
+    [SerializeField] Timer silenceTimer;
+    private bool silenced = false;
 
 
     #endregion
@@ -92,6 +96,22 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (slowed)
+        {
+            if(slowTimer.Update())
+            {
+                slowed = false;
+                moveSpeed = startingMoveSpeed;
+            }
+        }
+        if (silenced)
+        {
+            if (silenceTimer.Update())
+            {
+                silenced = false;
+                canSpell = true;
+            }
+        }
         if (canPlay)
         {
 
@@ -397,6 +417,39 @@ public class PlayerController : MonoBehaviour
     public void UnSetBuildingZone()
     {
         buildingZone = null;
+    }
+
+    public void Slow(float slowIntensity, float duration)
+    {
+        moveSpeed *= 0.5f;
+        slowTimer.SetDuration(duration, 1);
+        slowed = true;
+    }
+
+    public void Silence(float duration)
+    {
+        canSpell = false;
+        silenceTimer.SetDuration(duration, 1);
+        silenced = true;
+    }
+
+    public void SetSpeed(int _speed)
+    {
+        startingMoveSpeed = _speed;
+        moveSpeed = _speed;
+    }
+
+    public void SetMaxHealth(int _maxHealth)
+    {
+        health.MaxHealth(_maxHealth);
+    }
+
+    public void ResetStats()
+    {
+        startingMoveSpeed = 15;
+        moveSpeed = startingMoveSpeed;
+
+        gun.ResetStats();
     }
 
 }

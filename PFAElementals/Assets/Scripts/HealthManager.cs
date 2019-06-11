@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour {
 
-    [SerializeField] int maxHealth;
+    [SerializeField] int startMaxHealth;
     [SerializeField] GameObject playerPrefab;
     [SerializeField] bool player = true;
     [SerializeField] int team = 1;
     [SerializeField] bool show = false;
+
+    private int maxHealth;
 
     #region sounds
     public AudioClip spawn;
@@ -35,6 +37,7 @@ public class HealthManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        maxHealth = startMaxHealth;
         audioManager = Resources.Load("Sound Holder") as AudioManagerSO;
         source = GameObject.Find("AudioManager").GetComponent<AudioSource>();
         anim = GetComponentInChildren<Animator>();
@@ -54,16 +57,13 @@ public class HealthManager : MonoBehaviour {
             //playerController.CanPlay = false;
             Kill();
         }
-
-        if (show)
-        {
-        }
 	}
 
     private void Kill()
     {
         if (player)
         {
+            ResetStats();
             //gameObject.SetActive(false);
             playerController.CanPlay = false;
 
@@ -95,6 +95,10 @@ public class HealthManager : MonoBehaviour {
         {
             Camera.main.GetComponentInParent<ShakeTransform>().AddShakeEvent(data);
             currentHealth -= damage;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
         }
 
     }
@@ -114,9 +118,9 @@ public class HealthManager : MonoBehaviour {
         return currentHealth;
     }
 
-    public void SetKiller(GunController Killer)
+    public void SetKiller(GunController killer)
     {
-        currentlyKillingMe = Killer;
+        currentlyKillingMe = killer;
     }
 
     public void SetDamageableOn()
@@ -131,5 +135,18 @@ public class HealthManager : MonoBehaviour {
     public float HealthPercentage()
     {
         return currentHealth * (maxHealth^-1);
+    }
+
+    public void MaxHealth(int _maxHealth)
+    {
+        maxHealth = _maxHealth;
+        currentHealth = maxHealth;
+    }
+
+    public void ResetStats()
+    {
+        playerController.ResetStats();
+        maxHealth = startMaxHealth;
+
     }
 }
