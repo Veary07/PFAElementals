@@ -39,6 +39,8 @@ public class BulletController : MonoBehaviour
             target = 10;
         else if (player == 2)
             target = 9;
+
+        CheckEnemyAngle();
     }
 
     // Update is called once per frame
@@ -160,19 +162,6 @@ public class BulletController : MonoBehaviour
        
     }
 
-    //private void OnTriggerExit(Collider collision)
-    //{
-    //    if (collision.gameObject.tag == "Finish")
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
-
-    private void OnCollisionStay(Collision collision)
-    {
-        //Destroy(gameObject);
-    }
-
     public void SetOwner(GunController Owner)
     {
         owner = Owner;
@@ -181,5 +170,25 @@ public class BulletController : MonoBehaviour
     public void SetMonolithDestroyerOn()
     {
         monolithDestroyer = true;
+    }
+
+    public void CheckEnemyAngle()
+    {
+        GameObject targetPlayer = null;
+
+        if (player == 1)
+        {
+            targetPlayer = GameObject.Find("PLAYER 2");
+        }
+        else if (player == 2)
+        {
+            targetPlayer = GameObject.Find("PLAYER 1");
+        }
+        Debug.Log(targetPlayer);
+
+        if(!Physics.Linecast(transform.position, targetPlayer.transform.position))
+        {
+            transform.LookAt(targetPlayer.transform, Vector3.up);
+        }
     }
 }
