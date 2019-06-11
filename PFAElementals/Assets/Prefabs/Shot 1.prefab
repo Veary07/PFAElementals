@@ -96,7 +96,7 @@ MonoBehaviour:
   damage: 25
   player: 2
   isABall: 0
-  timer: 1
+  timer: 2
   accelerationDuration: 0.5
   accelerationCurve:
     serializedVersion: 2
@@ -145,11 +145,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4813690725990468}
     m_Modifications:
-    - target: {fileID: 584555069498620058, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
-        type: 3}
-      propertyPath: m_Name
-      value: AutoAttack
-      objectReference: {fileID: 0}
     - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -204,6 +199,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620058, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_Name
+      value: AutoAttack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a, type: 3}

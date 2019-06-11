@@ -185,10 +185,9 @@ public class BulletController : MonoBehaviour
             targetPlayer = GameObject.Find("PLAYER 1");
         }
         Debug.Log(targetPlayer);
-
-        if(!Physics.Linecast(transform.position, targetPlayer.transform.position))
+        if ( Mathf.Sqrt(Mathf.Pow(Vector3.Angle(targetPlayer.transform.position - transform.position, transform.forward), 2)) < 15f)
         {
-            transform.LookAt(targetPlayer.transform, Vector3.up);
+            transform.LookAt(targetPlayer.transform.position + new Vector3(0, 1, 0), transform.up);
         }
     }
 }
