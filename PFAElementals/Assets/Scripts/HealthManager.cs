@@ -63,20 +63,20 @@ public class HealthManager : MonoBehaviour {
     {
         if (player)
         {
-            ResetStats();
-            //gameObject.SetActive(false);
-            playerController.CanPlay = false;
+            StartCoroutine(Kill());
+            //ResetStats();
+            ////gameObject.SetActive(false);
+            //playerController.CanPlay = false;
 
-            anim.SetInteger("condition", 0);
-            currentHealth = maxHealth;
-            transform.position = respawnManager.GetMonolith(playerController.TeamNumber()).position;
-            anim.SetInteger("condition", 3);
-            source.PlayOneShot(spawn, 1f);
+            //anim.SetInteger("condition", 0);
+            //currentHealth = maxHealth;
+            //transform.position = respawnManager.GetMonolith(playerController.TeamNumber()).position;
+            //anim.SetInteger("condition", 3);
+            //source.PlayOneShot(spawn, 1f);
 
-            currentlyKillingMe.SetMonolithDestroyerOn();
+            //currentlyKillingMe.SetMonolithDestroyerOn();
 
         }
-
 
 
         else if (!player)
@@ -87,6 +87,22 @@ public class HealthManager : MonoBehaviour {
             Destroy(transform.parent.gameObject);
         }
 
+    }
+
+    IEnumerator KillCoroutine()
+    {
+        ResetStats();
+        //gameObject.SetActive(false);
+        playerController.CanPlay = false;
+
+        anim.SetInteger("condition", 0);
+        yield return null;
+        currentHealth = maxHealth;
+        transform.position = respawnManager.GetMonolith(playerController.TeamNumber()).position;
+        anim.SetInteger("condition", 3);
+        source.PlayOneShot(spawn, 1f);
+
+        currentlyKillingMe.SetMonolithDestroyerOn();
     }
 
     public void TakeDamage(int damage)
