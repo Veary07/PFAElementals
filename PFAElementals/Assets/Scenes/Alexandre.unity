@@ -333,12 +333,22 @@ PrefabInstance:
     - target: {fileID: 7504608043417818350, guid: c0a2e0a3691a7f545b4f3fd296153f89,
         type: 3}
       propertyPath: clampMaxY
-      value: 100
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7504608043417818350, guid: c0a2e0a3691a7f545b4f3fd296153f89,
         type: 3}
       propertyPath: lerpPerc
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504608043417818350, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: zoomIn
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504608043417818350, guid: c0a2e0a3691a7f545b4f3fd296153f89,
+        type: 3}
+      propertyPath: zoomOut
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9201828744416677327, guid: c0a2e0a3691a7f545b4f3fd296153f89,
         type: 3}
@@ -2072,6 +2082,7 @@ MonoBehaviour:
   coolDown: 2
   duration: 1
   shieldImage: {fileID: 1552190727}
+  shield: {fileID: 7998887834670040382, guid: c44442b18f8413d4592fa9f09591c0d6, type: 3}
 --- !u!4 &614244496 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4422296242085842, guid: 51191ed58221fc34794cdaeb23e8cbca,
@@ -3847,6 +3858,7 @@ MonoBehaviour:
   coolDown: 2
   duration: 1
   shieldImage: {fileID: 1086732448}
+  shield: {fileID: 7998887834670040382, guid: c44442b18f8413d4592fa9f09591c0d6, type: 3}
 --- !u!1 &1174375157
 GameObject:
   m_ObjectHideFlags: 0
@@ -5027,7 +5039,7 @@ PrefabInstance:
       objectReference: {fileID: 1724166622}
     - target: {fileID: 4117500765032678, guid: c03bdd386f564ae429b6a947ff64c7d6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.65
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4117500765032678, guid: c03bdd386f564ae429b6a947ff64c7d6, type: 3}
       propertyPath: m_LocalPosition.y
