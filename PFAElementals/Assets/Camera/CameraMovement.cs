@@ -56,8 +56,6 @@ public class CameraMovement : MonoBehaviour {
         Vector3 playerOneScreenPosition = cam.WorldToScreenPoint(playerOne.position);
         Vector3 playerTwoScreenPosition = cam.WorldToScreenPoint(playerTwo.position);
 
-        Debug.Log(Vector3.Distance(playerOneScreenPosition, playerTwoScreenPosition));
-
         float playerMinX;
         float playerMaxX;
 
