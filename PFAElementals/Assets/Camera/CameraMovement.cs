@@ -23,8 +23,11 @@ public class CameraMovement : MonoBehaviour {
     private float minZ = 0f;
     [SerializeField] float ZOffset = 20f;
 
-    private bool maxZoomedInReached = false;
-    private bool maxZoomedOutReached = false;
+    private bool maxZoomedInYReached = false;
+    private bool maxZoomedOutYReached = false;
+    private bool maxZoomedInZReached = false;
+    private bool maxZoomedOutZReached = false;
+
 
 
     private void Start()
@@ -53,6 +56,8 @@ public class CameraMovement : MonoBehaviour {
         Vector3 playerOneScreenPosition = cam.WorldToScreenPoint(playerOne.position);
         Vector3 playerTwoScreenPosition = cam.WorldToScreenPoint(playerTwo.position);
 
+        Debug.Log(Vector3.Distance(playerOneScreenPosition, playerTwoScreenPosition));
+
         float playerMinX;
         float playerMaxX;
 
@@ -68,29 +73,78 @@ public class CameraMovement : MonoBehaviour {
 
         }
 
-        if (Vector3.Distance(playerOne.transform.position, playerTwo.transform.position) > zoomOut)
+        if (clampMaxY - transform.position.y > 1f)
         {
-            maxZoomedInReached = false;
-            if (!maxZoomedOutReached)
+            maxZoomedOutYReached = false;
+        }
+        if (clampMaxZ - transform.position.z > 1f)
+        {
+            maxZoomedOutZReached = false;
+        }
+        if (transform.position.y - clampMinY > 1f)
+        {
+            maxZoomedInYReached = false;
+        }
+        if (transform.position.z - clampMinZ > 1f)
+        {
+            maxZoomedInZReached = false;
+        }
+
+        if (Vector3.Distance(playerOneScreenPosition, playerTwoScreenPosition) > zoomOut)
+        {
+            if (!maxZoomedOutYReached)
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.position.z - (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
+                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), transform.position.z), Time.deltaTime * lerpPerc);
             }
-            if (transform.position.y - clampMaxY < 1f || transform.position.z - clampMaxZ < 1f)
+
+            if (!maxZoomedOutZReached)
             {
-                maxZoomedOutReached = true;
+                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(transform.position.z - (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
+            }
+
+            //if (!maxZoomedOutReached)
+            //{
+            //    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.position.z - (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
+            //}
+
+            if (clampMaxY - transform.position.y < 1f)
+            {
+                maxZoomedOutYReached = true;
+            }
+
+            if (clampMaxZ - transform.position.z < 1f)
+            {
+                maxZoomedOutZReached = true;
             }
         }
 
-        else if (Vector3.Distance(playerOne.transform.position, playerTwo.transform.position) < zoomIn)
+        else if (Vector3.Distance(playerOneScreenPosition, playerTwoScreenPosition) < zoomIn)
         {
-            maxZoomedOutReached = false;
-            if (!maxZoomedInReached)
+            maxZoomedOutYReached = false;
+            maxZoomedOutZReached = false;
+
+            if (!maxZoomedInYReached)
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y - (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.localPosition.z + (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
+                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y - (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), transform.position.z), Time.deltaTime * lerpPerc);
             }
-            if (transform.position.y - clampMinY < 1f || transform.position.z - clampMinZ < 1f)
+
+            if (!maxZoomedInZReached)
             {
-                maxZoomedInReached = true;
+                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(transform.localPosition.z + (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
+            }
+
+
+            //if (!maxZoomedInReached)
+            //{
+            //    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, Mathf.Clamp(transform.position.y - (zoomSpeed * Time.deltaTime), clampMinY, clampMaxY), Mathf.Clamp(transform.localPosition.z + (zoomSpeed * Time.deltaTime), clampMinZ, clampMaxZ)), Time.deltaTime * lerpPerc);
+            //}
+            if (transform.position.y - clampMinY < 1f)
+            {
+                maxZoomedInYReached = true;
+            }
+            if (transform.position.z - clampMinZ < 1f)
+            {
+                maxZoomedInZReached = true;
             }
         }
 
