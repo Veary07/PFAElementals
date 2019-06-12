@@ -63,7 +63,7 @@ public class HealthManager : MonoBehaviour {
     {
         if (player)
         {
-            StartCoroutine(Kill());
+            StartCoroutine(KillCoroutine());
             //ResetStats();
             ////gameObject.SetActive(false);
             //playerController.CanPlay = false;
