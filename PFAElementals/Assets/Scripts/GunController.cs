@@ -11,7 +11,7 @@ public class GunController : MonoBehaviour {
 
     [SerializeField] private float decal = 0.2f;
     [SerializeField] Image ballImage;
-
+    
 
     public BulletController damageBall;
     public Timer damageBallTimer;
@@ -33,6 +33,11 @@ public class GunController : MonoBehaviour {
 
     private int target;
 
+    private bool damaged = false;
+    private int damage;
+    private bool stealed = false;
+    private int regene;
+    private bool bounced = false;
 
     private AudioSource source;
     public AudioClip bulletShot;
@@ -83,11 +88,25 @@ public class GunController : MonoBehaviour {
             {
                 shotCounter = timeBetweenShots;
                 BulletController newBullet = Instantiate(bullet, firePosition.position, new Quaternion(firePosition.rotation.x, firePosition.rotation.y + Random.Range(-decal, decal), firePosition.rotation.z, firePosition.rotation.w)) as BulletController;
+                if (damaged)
+                {
+                    newBullet.SetDamage(damage);
+                }
+                if (bounced)
+                {
+                    newBullet.SetBounce();
+                }
+                if(stealed)
+                {
+                    newBullet.SetLifeSteal(regene);
+                }
                 source.PlayOneShot(bulletShot, 1f);
                 newBullet.bulletSpeed = bulletSpeed;
                 newBullet.SetOwner(gameObject.GetComponent<GunController>());
                 if (monolithDestroyer)
+                {
                     newBullet.SetMonolithDestroyerOn();
+                }
             }
         }
         else
@@ -125,4 +144,30 @@ public class GunController : MonoBehaviour {
     {
         monolithDestroyer = false;
     }
+
+    public void DamageUp(int _damage)
+    {
+        damaged = true;
+        damage = _damage;
+    }
+
+    public void BounceOn()
+    {
+        bounced = true;
+    }
+    public void setLifeSteal(int _regene)
+    {
+        regene = _regene;
+        stealed = true;
+    }
+
+
+    public void ResetStats()
+    {
+        bounced = false;
+        damaged = false;
+        stealed = false;
+        monolithDestroyer = false;
+    }
+
 }

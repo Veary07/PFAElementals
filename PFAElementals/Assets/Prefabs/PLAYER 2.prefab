@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c3cc880c41eb940881a83f9756e571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  startMaxHealth: 100
   playerPrefab: {fileID: 1729426836301116}
   player: 1
   team: 1
