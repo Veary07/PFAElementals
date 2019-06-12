@@ -32,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8177678372514072202}
+  - {fileID: 302052950742097476}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -138,6 +139,81 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!1001 &877597418832078545
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4813690725990468}
+    m_Modifications:
+    - target: {fileID: 584555069498620058, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_Name
+      value: AutoAttack (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.011761802
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.707008
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.01176177
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70701
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -1.9060001
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a, type: 3}
+--- !u!4 &302052950742097476 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 877597418832078545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8746046113427422751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,6 +221,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4813690725990468}
     m_Modifications:
+    - target: {fileID: 584555069498620058, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_Name
+      value: AutoAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 584555069498620058, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 584555069498620053, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -199,11 +285,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 584555069498620058, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a,
-        type: 3}
-      propertyPath: m_Name
-      value: AutoAttack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b42fe2f4b73d5aa4e9339e7574d4cf1a, type: 3}

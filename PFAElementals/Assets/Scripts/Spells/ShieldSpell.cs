@@ -20,6 +20,8 @@ public class ShieldSpell : MonoBehaviour
     [SerializeField] private int coolDown;
     [SerializeField] private float duration;
     [SerializeField] Image shieldImage;
+    [SerializeField] GameObject shield;
+    private GameObject shieldInstantiated = null;
 
     private void Start()
     {
@@ -35,7 +37,7 @@ public class ShieldSpell : MonoBehaviour
             //shieldDuration.Update();
             if (shieldDuration.Update())
             {
-                healthManager.SetDamageableOn();
+                shield.transform.localScale = Vector3.Lerp(new Vector3(8, 8, 8), Vector3.zero, 1f);
                 shieldCoolDown.SetDuration(coolDown, 1);
                 restoring = true;
                 shielded = false;
@@ -59,6 +61,9 @@ public class ShieldSpell : MonoBehaviour
         healthManager = health;
         if (canSpell)
         {
+            shield.transform.localScale = Vector3.Lerp(Vector3.zero, new Vector3(8, 8, 8), 1f);
+            //shieldInstantiated = Instantiate(shield, transform.position + new Vector3(0,2,0), Quaternion.identity);
+            //shieldInstantiated.transform.parent = this.gameObject.transform;
             source.PlayOneShot(audioManager.shield);
             canSpell = false;
             shielded = true;
