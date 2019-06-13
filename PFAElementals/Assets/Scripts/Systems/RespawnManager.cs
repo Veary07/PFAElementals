@@ -118,7 +118,7 @@ public class RespawnManager : MonoBehaviour {
             }
             else
             {
-                SceneManager.LoadScene("RestartMenu");
+                SceneManager.LoadScene("MenusScene");
             }
 
         }
@@ -132,7 +132,7 @@ public class RespawnManager : MonoBehaviour {
             }
             else
             {
-                SceneManager.LoadScene("RestartMenu");
+                SceneManager.LoadScene("MenusScene");
             }
         }
     }
