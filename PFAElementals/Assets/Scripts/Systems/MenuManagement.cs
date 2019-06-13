@@ -6,15 +6,22 @@ using UnityEngine.SceneManagement;
 public class MenuManagement : MonoBehaviour
 {
     // Update is called once per frame
+    public int valor;
+
     void Update()
     {
-        if (Input.GetKeyDown("joystick 1 button 0"))
-        {
-            SceneManager.LoadScene("Alexandre");
-        }
-        if (Input.GetKeyDown("joystick 1 button 1"))
-        {
-            Application.Quit();
-        }
+
+    }
+
+    public void PlayScene()
+    {
+
+     SceneManager.LoadScene("Alexandre");
+
+    }
+
+    public void Quit()
+    {
+         Application.Quit();
     }
 }
