@@ -284,17 +284,17 @@ PrefabInstance:
     - target: {fileID: 6438629882861025069, guid: c44442b18f8413d4592fa9f09591c0d6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6438629882861025069, guid: c44442b18f8413d4592fa9f09591c0d6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6438629882861025069, guid: c44442b18f8413d4592fa9f09591c0d6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -34.1
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6438629882861025069, guid: c44442b18f8413d4592fa9f09591c0d6,
         type: 3}
@@ -1268,18 +1268,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b2e625c14c3cb4408f9a11bb47b7e43, type: 3}
---- !u!114 &757281942 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9111034420469496933, guid: 578dea4cd81309f498e92aeddc93d296,
-    type: 3}
-  m_PrefabInstance: {fileID: 1499146069}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b6cddc1568b484bb253ae790255f01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &798009800 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114243385282434282, guid: c03bdd386f564ae429b6a947ff64c7d6,
@@ -2446,7 +2434,7 @@ PrefabInstance:
         type: 3}
       propertyPath: respawnManager
       value: 
-      objectReference: {fileID: 757281942}
+      objectReference: {fileID: 0}
     - target: {fileID: 114829376450686002, guid: c03bdd386f564ae429b6a947ff64c7d6,
         type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].time
@@ -2544,7 +2532,7 @@ PrefabInstance:
       objectReference: {fileID: 1724166622}
     - target: {fileID: 4117500765032678, guid: c03bdd386f564ae429b6a947ff64c7d6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 4117500765032678, guid: c03bdd386f564ae429b6a947ff64c7d6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2552,7 +2540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4117500765032678, guid: c03bdd386f564ae429b6a947ff64c7d6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.3
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4117500765032678, guid: c03bdd386f564ae429b6a947ff64c7d6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2803,7 +2791,7 @@ PrefabInstance:
         type: 3}
       propertyPath: respawnManager
       value: 
-      objectReference: {fileID: 757281942}
+      objectReference: {fileID: 0}
     - target: {fileID: 114810005127717596, guid: 1adf3d5e3620dcc48be47fc8fba4fe77,
         type: 3}
       propertyPath: monolith
@@ -2922,15 +2910,15 @@ PrefabInstance:
       objectReference: {fileID: 1086732448}
     - target: {fileID: 4022851166978348, guid: 1adf3d5e3620dcc48be47fc8fba4fe77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.3
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4022851166978348, guid: 1adf3d5e3620dcc48be47fc8fba4fe77, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4022851166978348, guid: 1adf3d5e3620dcc48be47fc8fba4fe77, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 29.3
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4022851166978348, guid: 1adf3d5e3620dcc48be47fc8fba4fe77, type: 3}
       propertyPath: m_LocalRotation.x
