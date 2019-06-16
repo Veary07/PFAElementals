@@ -60,7 +60,7 @@ Material:
     - Vector1_EE74A66D: 0.5
     - _DiffusionProfileHash: 0
     m_Colors:
-    - Color_259226BE: {r: 0.69419754, g: 8.33803, b: 11.320755, a: 0}
+    - Color_259226BE: {r: 0.9140264, g: 2.4037282, b: 2.981132, a: 0}
     - Color_7468C651: {r: 0, g: 0.95390093, b: 2.828427, a: 1}
     - Color_CEEA6E08: {r: 0.03769135, g: 0.36580274, b: 0.7264151, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}

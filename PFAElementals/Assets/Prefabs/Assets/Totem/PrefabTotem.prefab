@@ -23,7 +23,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 1eba8477f853a9349b6bba6a3cf844da,
         type: 3}
       propertyPath: m_Name
-      value: GA_assets_totem_low
+      value: PrefabTotem
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1eba8477f853a9349b6bba6a3cf844da,
         type: 3}
@@ -84,7 +84,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 25bb48b3be1eb114b84518e34defa306, type: 2}
+      objectReference: {fileID: 2100000, guid: 63ba7498d48aef04caf59782e82f0c4a, type: 2}
     - target: {fileID: -1504981713932161579, guid: 1eba8477f853a9349b6bba6a3cf844da,
         type: 3}
       propertyPath: m_SelectedEditorRenderState

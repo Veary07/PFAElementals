@@ -7,13 +7,12 @@ public class Decompte : MonoBehaviour
 {
 
     private Text counterText;
-    public float startingTime;
+    [SerializeField] private float startingTime;
 
     // Start is called before the first frame update
     void Start()
     {
         counterText = GetComponent<Text>() as Text;
-
     }
 
     // Update is called once per frame

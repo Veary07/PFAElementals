@@ -243,7 +243,7 @@ Material:
     - _ZTestModeDistortion: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_7B5CABE4: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+    - Color_7B5CABE4: {r: 0.29218867, g: 0.28235295, b: 0.30980393, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

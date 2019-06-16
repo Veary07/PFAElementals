@@ -48,6 +48,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_51C640E: {r: 0, g: 1.5162314, b: 1.9524751, a: 0}
-    - Color_C858CD85: {r: 1.6470588, g: 2.745098, b: 2.9803922, a: 0}
+    - Color_51C640E: {r: 0, g: 1.1686275, b: 1.4980392, a: 0}
+    - Color_C858CD85: {r: 1.0217158, g: 4.756871, b: 6.188679, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

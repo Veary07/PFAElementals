@@ -21,12 +21,20 @@ public class RespawnManager : MonoBehaviour {
     [SerializeField] float movingSpeed = 2f;
     [SerializeField] float maxGlowThickness = 0.03f;
 
+    [SerializeField] GameObject summerWin;
+    [SerializeField] GameObject winterWin;
+
+    [SerializeField] Timer winTimer;
+    private bool finished = false;
+
 
 
     // Use this for initialization
     void Start ()
     {
-       
+        summerWin.SetActive(false);
+        winterWin.SetActive(false);
+
         map = GameObject.Find("Ground").GetComponent<Renderer>().material;
 
         teamOneSpawn.Clear();
@@ -53,6 +61,13 @@ public class RespawnManager : MonoBehaviour {
 
     private void Update()
     {
+        if (finished)
+        {
+            if (winTimer.Update())
+            {
+                SceneManager.LoadScene("MenusScene");
+            }
+        }
         if (isMoving)
         {
             // position
@@ -118,7 +133,9 @@ public class RespawnManager : MonoBehaviour {
             }
             else
             {
-                SceneManager.LoadScene("MenusScene");
+                winterWin.SetActive(true);
+                winTimer.SetDuration(3f, 1);
+                finished = true;
             }
 
         }
@@ -132,7 +149,9 @@ public class RespawnManager : MonoBehaviour {
             }
             else
             {
-                SceneManager.LoadScene("MenusScene");
+                summerWin.SetActive(true);
+                winTimer.SetDuration(3f, 1);
+                finished = true;
             }
         }
     }

@@ -254,7 +254,7 @@ public class PlayerController : MonoBehaviour
 
                     moveInput = new Vector3(Input.GetAxisRaw("HorizontalP"), 0f, Input.GetAxisRaw("VerticalP")).normalized;
 
-                if ((Vector3.right * Input.GetAxisRaw("HorizontalR") + Vector3.forward * Input.GetAxisRaw("VerticalR")).sqrMagnitude <= 0.0f)
+                if ((Vector3.right * Input.GetAxisRaw("HorizontalR") + Vector3.forward * Input.GetAxisRaw("VerticalR")).sqrMagnitude <= 0.0f && moveInput != Vector3.zero)
                 {
                     transform.rotation = Quaternion.LookRotation(moveInput, Vector3.up);
                 }
@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
 
                     moveInput = new Vector3(Input.GetAxisRaw("HorizontalP 2"), 0f, Input.GetAxisRaw("VerticalP 2")).normalized;
 
-                if ((Vector3.right * Input.GetAxisRaw("HorizontalR 2") + Vector3.forward * Input.GetAxisRaw("VerticalR 2")).sqrMagnitude <= 0.0f)
+                if ((Vector3.right * Input.GetAxisRaw("HorizontalR 2") + Vector3.forward * Input.GetAxisRaw("VerticalR 2")).sqrMagnitude <= 0.0f && moveInput != Vector3.zero)
                 {
                     transform.rotation = Quaternion.LookRotation(moveInput, Vector3.up);
                 }

@@ -41,6 +41,7 @@ public class ShieldSpell : MonoBehaviour
                 shieldCoolDown.SetDuration(coolDown, 1);
                 restoring = true;
                 shielded = false;
+                healthManager.SetDamageableOn();
             }
         }
         else if (restoring)
@@ -69,10 +70,6 @@ public class ShieldSpell : MonoBehaviour
             shielded = true;
             health.SetDamageableOff();
             shieldDuration.SetDuration(duration, 1);
-        }
-        else
-        {
-            Debug.Log("CD");
         }
     }
 }

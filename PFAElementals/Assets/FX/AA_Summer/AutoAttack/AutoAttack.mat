@@ -41,5 +41,5 @@ Material:
     - Vector1_FFAAA443: 1
     m_Colors:
     - Color_51C640E: {r: 1.5094341, g: 0.5453498, b: 0.26869506, a: 0}
-    - Color_C858CD85: {r: 11.984314, g: 2.6826944, b: 0, a: 0}
+    - Color_C858CD85: {r: 11.984314, g: 0.69624174, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
