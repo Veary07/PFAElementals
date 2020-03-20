@@ -24,30 +24,32 @@ public class Interactive : MonoBehaviour
             Collider[] colliders =  Physics.OverlapSphere(transform.position, radius);
             foreach (Collider nearbyObject in colliders)
             {
-                if (slower)
+                if (nearbyObject.CompareTag("Player"))
                 {
-                    PlayerController playerController = nearbyObject.GetComponent<PlayerController>();
-                    playerController.Slow(slow, duration);
-                }
+                    if (slower)
+                    {
+                        PlayerController playerController = nearbyObject.GetComponent<PlayerController>();
+                        playerController.Slow(slow, duration);
+                    }
 
-                if (damager)
-                {
-                    HealthManager health = nearbyObject.GetComponent<HealthManager>();
-                    health.TakeDamage(damage);
-                }
+                    if (damager)
+                    {
+                        HealthManager health = nearbyObject.GetComponent<HealthManager>();
+                        health.TakeDamage(damage);
+                    }
 
-                if (explosive)
-                {
-                    Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
-                    rb.AddExplosionForce(explosionForce, transform.position, radius);
-                }
+                    if (explosive)
+                    {
+                        Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
+                        rb.AddExplosionForce(explosionForce, transform.position, radius);
+                    }
 
-                if (silencer)
-                {
-                    PlayerController playerController = nearbyObject.GetComponent<PlayerController>();
-                    playerController.Slow(slow, duration);
+                    if (silencer)
+                    {
+                        PlayerController playerController = nearbyObject.GetComponent<PlayerController>();
+                        playerController.Silence(duration);
+                    }
                 }
-
             }
         }
     }

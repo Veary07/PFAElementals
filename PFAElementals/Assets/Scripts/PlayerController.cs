@@ -182,8 +182,9 @@ public class PlayerController : MonoBehaviour
                         buildingZone.SetTeamAndIndex(playerNumber, respawnManager.GetListCount(playerNumber) - 1);
                         isBuilding = false;
                         canBuild = false;
+                        anim.SetInteger("condition", 0);
+                        }
                     }
-                }
                 else if (Input.GetAxis("RT") == 0)
                 {
                     canMove = true;
@@ -215,6 +216,7 @@ public class PlayerController : MonoBehaviour
 
                     if (isBuilding && buildingTimer.Update())
                     {
+                        anim.SetInteger("condition", 0);
                         source.PlayOneShot(audioManager.totemConstruction);
                         respawnManager.AddMonolith(playerNumber, buildingZone.transform);
                         buildingZone.SetTeamAndIndex(playerNumber, respawnManager.GetListCount(playerNumber) - 1);

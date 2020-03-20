@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4548561910155378}
   - component: {fileID: 114966980292780364}
-  - component: {fileID: 6358957161210367925}
   m_Layer: 9
   m_Name: Monolithe Left
   m_TagString: Monolith
@@ -53,19 +52,6 @@ MonoBehaviour:
     type: 3}
   spawn: {fileID: 4768259404848584}
   health: {fileID: 114798161440468974}
---- !u!65 &6358957161210367925
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221764243383040}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 4, z: 0}
 --- !u!1 &1264938456181560
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,8 +93,8 @@ GameObject:
   - component: {fileID: 4320762763204454}
   - component: {fileID: 33997400066328520}
   - component: {fileID: 23439450888802280}
-  - component: {fileID: 65733302256514136}
   - component: {fileID: 114798161440468974}
+  - component: {fileID: 458123435417027654}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Monolith
@@ -175,19 +161,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &65733302256514136
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415045602866510}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114798161440468974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +184,20 @@ MonoBehaviour:
   damageable: 1
   data: {fileID: 11400000, guid: 70c7a546884de604d88352ac147756ba, type: 2}
   anim: {fileID: 0}
+--- !u!136 &458123435417027654
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415045602866510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.15
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1001 &863011162265479744
 PrefabInstance:
   m_ObjectHideFlags: 0

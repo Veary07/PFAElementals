@@ -5,13 +5,12 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     private Transform bar;
-    private Transform camera;
+    [SerializeField] private Transform cameraPos;
 
     // Start is called before the first frame update
     private void Awake()
     {
         bar = transform.Find("Bar");
-        camera = transform.Find("Camera");
     }
 
     public void SetSize(float sizeNormalized)
@@ -21,7 +20,7 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(camera);
+        transform.LookAt(cameraPos);
     }
 
 }

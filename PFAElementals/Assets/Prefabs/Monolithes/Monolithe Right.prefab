@@ -41,8 +41,8 @@ GameObject:
   - component: {fileID: 4724375329895642}
   - component: {fileID: 33251349880193240}
   - component: {fileID: 23711881758801352}
-  - component: {fileID: 65424732574071262}
   - component: {fileID: 114939654264423586}
+  - component: {fileID: 7108330094923549543}
   m_Layer: 10
   m_Name: Cube
   m_TagString: Monolith
@@ -82,7 +82,7 @@ MeshRenderer:
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -109,19 +109,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &65424732574071262
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621609357647354}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114939654264423586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +132,20 @@ MonoBehaviour:
   damageable: 1
   data: {fileID: 11400000, guid: 70c7a546884de604d88352ac147756ba, type: 2}
   anim: {fileID: 0}
+--- !u!136 &7108330094923549543
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621609357647354}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.15
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &1692465157408428
 GameObject:
   m_ObjectHideFlags: 0

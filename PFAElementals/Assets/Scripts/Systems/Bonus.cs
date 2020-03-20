@@ -15,7 +15,15 @@ public class Bonus : MonoBehaviour
     [SerializeField] int newMaxHealth = 150;
     [SerializeField] int speed = 25;
 
+    public int index = -1;
+    BonusSpawner bonusSpawner;
+
     GunController currentlyKillingMe = null;
+
+    private void Start()
+    {
+        bonusSpawner = FindObjectOfType<BonusSpawner>();
+    }
 
     public void DoStuff()
     {
@@ -44,6 +52,8 @@ public class Bonus : MonoBehaviour
         {
             currentlyKillingMe.DamageUp(damage);
         }
+
+        bonusSpawner.AddNumberList(index);
         Destroy(gameObject);
     }
 

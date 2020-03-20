@@ -14,7 +14,7 @@ public class BuildingZone : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (respawnManager.GetListCount(team) >= (index + 1))
         {
@@ -29,19 +29,17 @@ public class BuildingZone : MonoBehaviour
         }
     }
 
-    
-
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.SetBuildingZone(this as BuildingZone);
-            if (!totemed && !isToteming)
+            if (!totemed)
             {
                 player.CanBuild(gameObject.transform);
             }
-            else if (totemed || isToteming)
+            else if (totemed)
             {
                 player.CanNotBuild();
             }
@@ -62,11 +60,6 @@ public class BuildingZone : MonoBehaviour
     {
         team = _team;
         index = _index;
-    }
-
-    public void Toteming()
-    {
-        isToteming = true;
     }
 
     public void Totemed()
